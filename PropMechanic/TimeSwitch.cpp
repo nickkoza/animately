@@ -23,9 +23,6 @@ void TimeSwitch::close()
 {
     digitalWrite(pin, closedState);
     state = Closed;
-    Serial.print("TIMESWITCH - PIN ");
-    Serial.print(pin);
-    Serial.println(" - Close");
 	// TODO - Remove the timeline entry if it still exists
 }
 

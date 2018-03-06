@@ -4,6 +4,7 @@
 #include <Arduino.h>
 
 #include "PropMechanic.h"
+#include "PriorityQueue.h"
 
 // Timeline let's you schedule future function executions with millisecond granularity.
 // Timeline is constant-memory after it initializes the required space in the heap during construction.
@@ -12,17 +13,17 @@
 class Timeline
 {
 private:
-    unsigned long timer;
-
-    struct Entry {
-        milliseconds runAtTime;
+    struct TimelineEntry {
         void *instance;
         void (*function)(void *instance);
     };
-
-    Entry *entries;
-    int entriesIndex;
-    int maxEntries;
+	
+	int maxEntries;
+	TimelineEntry *entriesPool;
+	PriorityQueue<TimelineEntry> *entries;
+	
+	TimelineEntry *getEntry();
+	void returnEntry(TimelineEntry *entry);
 
 public:
     Timeline(int maxEntries);

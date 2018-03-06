@@ -3,6 +3,9 @@
 
 TimeSwitch *timeSwitch;
 Timeline *timeline;
+
+unsigned long lastMillis;
+
 void setup() {
     Serial.begin(9600);
 
@@ -20,7 +23,7 @@ void setup() {
     timeline->schedule(timeSwitch, TimeSwitch::run, 9000);
     timeline->schedule(timeSwitch, TimeSwitch::run, 10000);
 
-	noInterrupts();
+	/*noInterrupts();
 	TCCR1A = 0;
 	TCCR1B = 0;
 	TCNT1  = 0;
@@ -29,14 +32,22 @@ void setup() {
 	TCCR1B |= (1 << WGM12);
 	TCCR1B |= (1 << CS12);
 	TIMSK1 |= (1 << OCIE1A);
-	interrupts();
+	interrupts();*/
+	
+	lastMillis = millis();
 }
 
-ISR(TIMER1_COMPA_vect)
+/*ISR(TIMER1_COMPA_vect)
 {
     Timeline::instance->tick();
-}
+}*/
 
 void loop() {
+  Timeline::instance->tick();
   
+  unsigned long currentMillis = millis();
+  if (currentMillis > lastMillis + 1000) {
+	  lastMillis = currentMillis;
+	  Serial.println(currentMillis);
+  }
 }
