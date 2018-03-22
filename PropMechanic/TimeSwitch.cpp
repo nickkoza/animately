@@ -23,7 +23,7 @@ void TimeSwitch::close()
 {
     digitalWrite(pin, closedState);
     state = Closed;
-	// TODO - Remove the timeline entry if it still exists
+	Serial.println("CLOSE");
 }
 
 boolean TimeSwitch::isOpen()
@@ -34,11 +34,5 @@ boolean TimeSwitch::isOpen()
 boolean TimeSwitch::isClosed()
 {
     return state == Closed;
-}
-
-void TimeSwitch::run(void *instance)
-{
-    TimeSwitch *switchInstance = (TimeSwitch *)instance;
-    switchInstance->close();
 }
 

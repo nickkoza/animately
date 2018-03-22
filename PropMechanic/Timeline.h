@@ -4,34 +4,35 @@
 #include <Arduino.h>
 
 #include "PropMechanic.h"
-#include "PriorityQueue.h"
+#include "TimelineQueue.h"
+#include "FastDelegate.h"
 
 // Timeline let's you schedule future function executions with millisecond granularity.
-// Timeline is constant-memory after it initializes the required space in the heap during construction.
+// Timeline is constant-memory.
 // Timeline uses an unsigned long to keep track of time, meaning it can operate for up to _49_days_ before overflowing.
 // If you need to run longer than that you'll have to make changes to this system.
 class Timeline
-{
+{	
+public:
+	typedef fastdelegate::FastDelegate0<> TimelineDelegate;
+	
 private:
     struct TimelineEntry {
-        void *instance;
-        void (*function)(void *instance);
+        TimelineDelegate timelineDelegate;
+		boolean used;
     };
 	
-	int maxEntries;
-	TimelineEntry *entriesPool;
-	PriorityQueue<TimelineEntry> *entries;
+	TimelineEntry entriesPool[timelineMaxEntries];
+	TimelineQueue<TimelineEntry, timelineMaxEntries> entries;
 	
 	TimelineEntry *getEntry();
 	void returnEntry(TimelineEntry *entry);
 
 public:
-    Timeline(int maxEntries);
-    ~Timeline();
 
-    void schedule(void *instance, void(*function)(void *instance), milliseconds delay);
+    Timeline();
 
-    static Timeline *instance;
+    void schedule(TimelineDelegate timelineDelegate, milliseconds delay);
 
     void tick();
 };

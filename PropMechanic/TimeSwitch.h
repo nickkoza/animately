@@ -23,7 +23,6 @@ public:
     void close();
     boolean isOpen();
     boolean isClosed();
-    static void run(void *instance);
 };
 
 #endif

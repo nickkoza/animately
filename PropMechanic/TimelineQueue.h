@@ -1,5 +1,5 @@
-#ifndef __ORDEREDLIST_H__
-#define __ORDEREDLIST_H__
+#ifndef __TIMELINEQUEUE_H__
+#define __TIMELINEQUEUE_H__
 
 typedef unsigned long priority_t;
 typedef unsigned long entry_t;
@@ -7,12 +7,13 @@ typedef unsigned long entry_t;
 #include <Arduino.h>
 
 /*
-PriorityQueue stores a linked-list in a non-sorted array, linked according to priority (lowest to highest.)
-The array is used to keep it memory-constant, while the linked-list aspect is used to make it easy to always
+TimelineQueue is a priority queue that works in reverse order (lowest number is highest priority).
+To avoid memory allocations, it stores a linked-list in a non-sorted array, linked according to order (lowest to highest.)
+While the array is used to keep it memory-constant, the linked-list aspect is used to make it easy to always
 find the lowest priority item. This is ideal for situations where we only care about the lowest priority item
 and not the rest of the list.
 */
-template <class T> class PriorityQueue
+template <class T, int LENGTH> class TimelineQueue
 {
 private:
 	const int NO_NEXT = -1;
@@ -25,16 +26,14 @@ private:
 		int nextIndex;
 	};
 
-
-	int maxLength;
 	int headIndex;
 	int count;
 	unsigned long entryIdCounter;
-	Entry *contents;
+	Entry contents[LENGTH];
 	
 	
 	int findEmptyIndex() {
-		for (int i = 0; i < maxLength; i++)
+		for (int i = 0; i < LENGTH; i++)
 		{
 			if (contents[i].id == 0 && contents[i].entry == NULL)
 			{
@@ -45,25 +44,19 @@ private:
 	}
 
 public:
-	PriorityQueue(int maxLength) {
-		this->maxLength = maxLength;
+	TimelineQueue() {
 		headIndex = 0;
 		count = 0;
 		entryIdCounter = 1UL;
-		contents = new Entry[maxLength];
 		
-		for (int i = 0; i < maxLength; i++)
+		for (int i = 0; i < LENGTH; i++)
 		{
 			contents[i].nextIndex = NO_NEXT;
 		}
 	}
 	
-	
-	~PriorityQueue();
-
-
 	entry_t push(T* entry, priority_t itemPriority) {
-		if (count >= maxLength) {
+		if (count >= LENGTH) {
 			// ERROR
 			return 0UL;
 		}
@@ -86,7 +79,7 @@ public:
 		{
 			int prevIndex = headIndex;
 			int currIndex = contents[headIndex].nextIndex;
-			for (int i = 0; i < maxLength; i++) {
+			for (int i = 0; i < LENGTH; i++) {
 				if (currIndex == NO_NEXT || contents[currIndex].priority > itemPriority)
 				{
 					contents[prevIndex].nextIndex = newIndex;
@@ -129,4 +122,4 @@ public:
 	}
 };
 
-#endif //__ORDEREDLIST_H__
+#endif //__TIMELINEQUEUE_H__
