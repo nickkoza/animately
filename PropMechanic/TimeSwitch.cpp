@@ -23,7 +23,7 @@ void TimeSwitch::close()
 {
     digitalWrite(pin, closedState);
     state = Closed;
-	Serial.println("CLOSE");
+    Serial.println("CLOSE");
 }
 
 boolean TimeSwitch::isOpen()

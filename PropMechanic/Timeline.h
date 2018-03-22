@@ -12,21 +12,21 @@
 // Timeline uses an unsigned long to keep track of time, meaning it can operate for up to _49_days_ before overflowing.
 // If you need to run longer than that you'll have to make changes to this system.
 class Timeline
-{	
+{    
 public:
-	typedef fastdelegate::FastDelegate0<> TimelineDelegate;
-	
+    typedef fastdelegate::FastDelegate0<> TimelineDelegate;
+    
 private:
     struct TimelineEntry {
         TimelineDelegate timelineDelegate;
-		boolean used;
+        boolean used;
     };
-	
-	TimelineEntry entriesPool[timelineMaxEntries];
-	TimelineQueue<TimelineEntry, timelineMaxEntries> entries;
-	
-	TimelineEntry *getEntry();
-	void returnEntry(TimelineEntry *entry);
+    
+    TimelineEntry entriesPool[timelineMaxEntries];
+    TimelineQueue<TimelineEntry, timelineMaxEntries> entries;
+    
+    TimelineEntry *getEntry();
+    void returnEntry(TimelineEntry *entry);
 
 public:
 
