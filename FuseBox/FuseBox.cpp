@@ -1,42 +1,23 @@
 ﻿#include "Timeline.h"
 #include "TimeSwitch.h"
 
-TimeSwitch *timeSwitch;
-Timeline *timeline;
+Timeline timeline;
+TimeSwitch *timeSwitch = new TimeSwitch(0, 1000L, 2000L);
+Timeline::TimelineDelegate timelineDelegate = fastdelegate::MakeDelegate(timeSwitch, &TimeSwitch::close);
+
 void setup() {
     Serial.begin(9600);
 
-    timeSwitch = new TimeSwitch(0, 1000L, 2000L);
-
-    timeline = new Timeline(15);
-    timeline->schedule(timeSwitch, TimeSwitch::run, 1000);
-    timeline->schedule(timeSwitch, TimeSwitch::run, 2000);
-    timeline->schedule(timeSwitch, TimeSwitch::run, 3000);
-    timeline->schedule(timeSwitch, TimeSwitch::run, 4000);
-    timeline->schedule(timeSwitch, TimeSwitch::run, 5000);
-    timeline->schedule(timeSwitch, TimeSwitch::run, 6000);
-    timeline->schedule(timeSwitch, TimeSwitch::run, 7000);
-    timeline->schedule(timeSwitch, TimeSwitch::run, 8000);
-    timeline->schedule(timeSwitch, TimeSwitch::run, 9000);
-    timeline->schedule(timeSwitch, TimeSwitch::run, 10000);
-
-	noInterrupts();
-	TCCR1A = 0;
-	TCCR1B = 0;
-	TCNT1  = 0;
-
-	OCR1A = 31250;
-	TCCR1B |= (1 << WGM12);
-	TCCR1B |= (1 << CS12);
-	TIMSK1 |= (1 << OCIE1A);
-	interrupts();
-}
-
-ISR(TIMER1_COMPA_vect)
-{
-    Timeline::instance->tick();
+    timeline.schedule(timelineDelegate, 1000);
+    timeline.schedule(timelineDelegate, 2000);
+    timeline.schedule(timelineDelegate, 3000);
+    timeline.schedule(timelineDelegate, 4000);
+    timeline.schedule(timelineDelegate, 5000);
+    timeline.schedule(timelineDelegate, 6000);
+    timeline.schedule(timelineDelegate, 7000);
+    timeline.schedule(timelineDelegate, 8000);
 }
 
 void loop() {
-  
+  timeline.tick();
 }

@@ -1,55 +1,49 @@
 #include "Timeline.h"
 
-Timeline *Timeline::instance = NULL;
-
-Timeline::Timeline(int maxEntries)
+Timeline::Timeline()
 {
-    this->maxEntries = maxEntries;
-    entriesIndex = 0;
-    Entry *entries = new Entry[maxEntries];
-    memset(entries, 0, sizeof(Entry) * maxEntries);
-
-    if (Timeline::instance != NULL) {
-        ERROR("Allocated timeline when one already exists. Only the last one created will have the interupt available.");
-    }
-    Timeline::instance = this;
+    memset(entriesPool, 0, sizeof(TimelineEntry) * timelineMaxEntries);
 }
 
-Timeline::~Timeline()
+void Timeline::schedule(TimelineDelegate timelineDelegate, milliseconds delay)
 {
-    delete[] entries;
-}
-
-void Timeline::schedule(void *instance, void(*function)(void *instance), milliseconds delay)
-{
-    // A sorted insert would make more sense here if you have an extremely long timeline, since it
-    // would allow you to check fewer entries per-tick
-    for (int i = 0; i < maxEntries; i++) {
-        Entry *entry = entries + i;
-        if (entry->instance == NULL) {
-            entry->instance = instance;
-            entry->function = function;
-            entry->runAtTime = timer + delay;
+    for (int i = 0; i < timelineMaxEntries; i++) {
+        if(entriesPool[i].timelineDelegate.empty() && entriesPool[i].used == false) {
+            Serial.println("Scheduled entry");
+            
+            entriesPool[i].timelineDelegate = timelineDelegate;
+            entriesPool[i].used = true;
+            entries.push(&entriesPool[i], millis() + delay);
             return;
         }
     }
-    ERROR("Timeline max entries exceeded")
+    ERROR(COULD_NOT_ALLOCATE);
 }
 
 void Timeline::tick()
 {
-    timer++;
-
-    if (timer % 1000 == 0) {
-        Serial.println(timer);
-        Serial.flush();
+    if (entries.isNotEmpty() && entries.peakPriority() <= millis()) {
+        TimelineEntry *entry = entries.pop();
+        TimelineDelegate currentDelegate = entry->timelineDelegate;
+        Serial.println(entries.size());
+        
+        returnEntry(entry);
+        (currentDelegate)();
     }
+}
 
-    for (int i = 0; i < maxEntries; i++) {
-        Entry *entry = entries + i;
-        if (entry->instance != NULL && entry->runAtTime <= timer) {
-            entry->function(entry->instance);
-            entry->instance = NULL;
+Timeline::TimelineEntry *Timeline::getEntry() {
+    for (int i = 0; i < timelineMaxEntries; i++) {
+        if(entriesPool[i].timelineDelegate.empty() && entriesPool[i].used == false) {
+            Serial.println("GET ENTRY");
+            return &entriesPool[i];
         }
     }
+    ERROR(COULD_NOT_ALLOCATE);
+    return NULL;
+}
+
+void Timeline::returnEntry(TimelineEntry *entry) {
+    entry->used == false;
+    entry->timelineDelegate.clear();
 }
