@@ -176,6 +176,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Button.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Button.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="FastDelegate.h">
       <SubType>compile</SubType>
     </Compile>
