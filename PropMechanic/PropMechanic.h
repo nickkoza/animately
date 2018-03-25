@@ -11,6 +11,7 @@ static const int timelineMaxEntries = 20;
 
 #define COULD_NOT_ALLOCATE "E01"
 #define REDUNDANT_ALLOCATION "E02"
+#define COULD_NOT_SCHEDULE "E03"
 
 #define ERROR(msg) Serial.println(msg);
 

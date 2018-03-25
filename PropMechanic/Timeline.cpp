@@ -7,25 +7,27 @@ Timeline::Timeline()
 
 void Timeline::schedule(TimelineDelegate timelineDelegate, milliseconds delay)
 {
-    for (int i = 0; i < timelineMaxEntries; i++) {
-        if(entriesPool[i].timelineDelegate.empty() && entriesPool[i].used == false) {
-            Serial.println("Scheduled entry");
-            
-            entriesPool[i].timelineDelegate = timelineDelegate;
-            entriesPool[i].used = true;
-            entries.push(&entriesPool[i], millis() + delay);
-            return;
-        }
+    TimelineEntry *entry = getEntry();
+    if (NULL == entry) {
+        ERROR(COULD_NOT_SCHEDULE);
+        return;
     }
-    ERROR(COULD_NOT_ALLOCATE);
+    
+    Serial.println("Scheduled entry");
+    
+    entry->timelineDelegate = timelineDelegate;
+    entry->used = true;
+    entries.push(entry, millis() + delay);
 }
 
 void Timeline::tick()
 {
     if (entries.isNotEmpty() && entries.peakPriority() <= millis()) {
+        //priority_t priority = entries.peakPriority();
+        //Serial.println(priority);
         TimelineEntry *entry = entries.pop();
         TimelineDelegate currentDelegate = entry->timelineDelegate;
-        Serial.println(entries.size());
+        //Serial.println(entries.size());
         
         returnEntry(entry);
         (currentDelegate)();
@@ -35,7 +37,6 @@ void Timeline::tick()
 Timeline::TimelineEntry *Timeline::getEntry() {
     for (int i = 0; i < timelineMaxEntries; i++) {
         if(entriesPool[i].timelineDelegate.empty() && entriesPool[i].used == false) {
-            Serial.println("GET ENTRY");
             return &entriesPool[i];
         }
     }
@@ -44,6 +45,6 @@ Timeline::TimelineEntry *Timeline::getEntry() {
 }
 
 void Timeline::returnEntry(TimelineEntry *entry) {
-    entry->used == false;
+    entry->used = false;
     entry->timelineDelegate.clear();
 }
