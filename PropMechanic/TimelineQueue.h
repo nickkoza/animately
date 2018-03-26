@@ -31,7 +31,6 @@ private:
     unsigned long entryIdCounter;
     Entry contents[LENGTH];
     
-    
     int findEmptyIndex() {
         for (int i = 0; i < LENGTH; i++)
         {

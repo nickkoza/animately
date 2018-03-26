@@ -3,6 +3,7 @@
 
 #include "Arduino.h"
 #include "FastDelegate.h"
+#include "PropMechanic.h"
 
 // Button provides a basic interface for calling delegates and de-bouncing button inputs.
 // This class requires that you call the tick() method often.
@@ -10,22 +11,22 @@
 // it for that use.
 class Button {
 public:
-    typedef fastdelegate::FastDelegate1<int> ButtonPressDelegate;
-    typedef fastdelegate::FastDelegate1<int> ButtonHoldDelegate;
-    typedef fastdelegate::FastDelegate1<int> ButtonReleaseDelegate;
+    typedef fastdelegate::FastDelegate1<inputId> ButtonPressDelegate;
+    typedef fastdelegate::FastDelegate1<inputId> ButtonHoldDelegate;
+    typedef fastdelegate::FastDelegate1<inputId> ButtonReleaseDelegate;
     
 private:
-    int pin;
-    int id;
+    pinNum pin;
+    inputId id;
     
     ButtonPressDelegate pressDelegate;
     ButtonHoldDelegate holdDelegate;
     ButtonReleaseDelegate releaseDelegate;
-    
+
     boolean pressed;
 
 public:
-    Button(int pin, int id, ButtonPressDelegate pressDelegate, ButtonHoldDelegate holdDelegate, ButtonReleaseDelegate releaseDelegate);
+    Button(pinNum pin, inputId id, ButtonPressDelegate pressDelegate, ButtonHoldDelegate holdDelegate, ButtonReleaseDelegate releaseDelegate);
     void tick();
 };
 

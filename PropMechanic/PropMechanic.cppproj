@@ -185,6 +185,15 @@
     <Compile Include="FastDelegate.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Memory.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Memory.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="RingBuffer.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="TimelineQueue.h">
       <SubType>compile</SubType>
     </Compile>

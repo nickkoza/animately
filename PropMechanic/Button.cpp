@@ -1,6 +1,6 @@
 #include "Button.h"
 
-Button::Button(int pin, int id, ButtonPressDelegate pressDelegate, ButtonHoldDelegate holdDelegate, ButtonReleaseDelegate releaseDelegate) {
+Button::Button(pinNum pin, inputId id, ButtonPressDelegate pressDelegate, ButtonHoldDelegate holdDelegate, ButtonReleaseDelegate releaseDelegate) {
     this->pin = pin;
     this->id = id;
     this->pressDelegate = pressDelegate;

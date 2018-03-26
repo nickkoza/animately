@@ -251,6 +251,12 @@
     <Compile Include="FuseBox.cpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Speaker.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Speaker.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Content Include="readme.html">
     </Content>
   </ItemGroup>

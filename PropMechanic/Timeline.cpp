@@ -2,10 +2,13 @@
 
 Timeline::Timeline()
 {
-    memset(entriesPool, 0, sizeof(TimelineEntry) * timelineMaxEntries);
+    memset(entriesPool, 0, sizeof(TimelineEntry) * TIMELINE_MAX_SCHEDULED_ENTRIES);
 }
 
-void Timeline::schedule(TimelineDelegate timelineDelegate, milliseconds delay)
+void Timeline::schedule(TimelineEventStartDelegate startDelegate,
+    TimelineTransitionDelegate transitionDelegate,
+    TimelineEventEndDelegate endDelegate,
+    void *data, milliseconds delay, milliseconds duration)
 {
     TimelineEntry *entry = getEntry();
     if (NULL == entry) {
@@ -15,28 +18,56 @@ void Timeline::schedule(TimelineDelegate timelineDelegate, milliseconds delay)
     
     Serial.println("Scheduled entry");
     
-    entry->timelineDelegate = timelineDelegate;
+    entry->startDelegate = startDelegate;
+    entry->transitionDelegate = transitionDelegate;
+    entry->endDelegate = endDelegate;
+    entry->data = data;
     entry->used = true;
+    entry->duration = duration;
     entries.push(entry, millis() + delay);
 }
 
 void Timeline::tick()
 {
-    if (entries.isNotEmpty() && entries.peakPriority() <= millis()) {
-        //priority_t priority = entries.peakPriority();
-        //Serial.println(priority);
+    milliseconds currentMillis = millis();
+    
+    // Start events
+    if (entries.isNotEmpty() && entries.peakPriority() <= currentMillis) {
         TimelineEntry *entry = entries.pop();
-        TimelineDelegate currentDelegate = entry->timelineDelegate;
-        //Serial.println(entries.size());
-        
-        returnEntry(entry);
-        (currentDelegate)();
+        entry->startedAt = currentMillis;
+        activeEntries.add(entry);
+        if (NULL != entry->startDelegate) {
+            entry->startDelegate(entry->data);
+        }
     }
+    
+    // Active events
+    for (int i = 0; i < activeEntries.size(); i++) {
+        TimelineEntry *entry = activeEntries.get(i);
+        if (NULL != entry->transitionDelegate) {
+            float transitionAmount = (float)(currentMillis - entry->startedAt) / (float)entry->duration;
+            entry->transitionDelegate(transitionAmount, entry->data);
+        }
+    }
+
+    // End/expire events
+    while(activeEntries.isNotEmpty() && activeEntries.get(0)->startedAt + activeEntries.get(0)->duration < currentMillis) {
+        TimelineEntry *entry = activeEntries.get(0);
+        if (NULL != entry->endDelegate) {
+            entry->endDelegate(entry->data);
+        }
+        returnEntry(entry);
+        activeEntries.remove();
+    }        
 }
 
 Timeline::TimelineEntry *Timeline::getEntry() {
-    for (int i = 0; i < timelineMaxEntries; i++) {
-        if(entriesPool[i].timelineDelegate.empty() && entriesPool[i].used == false) {
+    for (int i = 0; i < TIMELINE_MAX_SCHEDULED_ENTRIES; i++) {
+        if(entriesPool[i].startDelegate.empty() &&
+            entriesPool[i].transitionDelegate.empty() &&
+            entriesPool[i].endDelegate.empty() &&
+            entriesPool[i].used == false) {
+
             return &entriesPool[i];
         }
     }
@@ -46,5 +77,7 @@ Timeline::TimelineEntry *Timeline::getEntry() {
 
 void Timeline::returnEntry(TimelineEntry *entry) {
     entry->used = false;
-    entry->timelineDelegate.clear();
+    entry->startDelegate.clear();
+    entry->transitionDelegate.clear();
+    entry->endDelegate.clear();
 }
