@@ -185,6 +185,9 @@
     <Compile Include="FastDelegate.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="List.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Memory.cpp">
       <SubType>compile</SubType>
     </Compile>

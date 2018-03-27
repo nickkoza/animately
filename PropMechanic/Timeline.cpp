@@ -27,10 +27,11 @@ void Timeline::schedule(TimelineEventStartDelegate startDelegate,
     entries.push(entry, millis() + delay);
 }
 
-void Timeline::tick()
-{
-    milliseconds currentMillis = millis();
-    
+void Timeline::tick() {
+    this->tick(millis());
+}
+
+void Timeline::tick(milliseconds currentMillis) {   
     // Start events
     if (entries.isNotEmpty() && entries.peakPriority() <= currentMillis) {
         TimelineEntry *entry = entries.pop();
@@ -48,17 +49,17 @@ void Timeline::tick()
             float transitionAmount = (float)(currentMillis - entry->startedAt) / (float)entry->duration;
             entry->transitionDelegate(transitionAmount, entry->data);
         }
-    }
 
-    // End/expire events
-    while(activeEntries.isNotEmpty() && activeEntries.get(0)->startedAt + activeEntries.get(0)->duration < currentMillis) {
-        TimelineEntry *entry = activeEntries.get(0);
-        if (NULL != entry->endDelegate) {
-            entry->endDelegate(entry->data);
+        if (entry->startedAt + entry->duration <= currentMillis) {
+            if (NULL != entry->endDelegate) {
+                entry->endDelegate(entry->data);
+            }
+
+            returnEntry(entry);
+            activeEntries.remove(i);
+            i--; // This is janky...
         }
-        returnEntry(entry);
-        activeEntries.remove();
-    }        
+    }
 }
 
 Timeline::TimelineEntry *Timeline::getEntry() {
