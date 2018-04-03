@@ -188,13 +188,7 @@
     <Compile Include="List.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Memory.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Memory.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="RingBuffer.h">
+    <Compile Include="PropMechanic.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="TimelineQueue.h">

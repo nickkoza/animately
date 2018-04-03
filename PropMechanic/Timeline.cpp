@@ -23,7 +23,7 @@ void Timeline::schedule(TimelineEventStartDelegate startDelegate,
         return;
     }
     
-    Serial.println("Scheduled entry");
+    LOG("Scheduled entry");
     
     entry->startDelegate = startDelegate;
     entry->transitionDelegate = transitionDelegate;
