@@ -8,7 +8,14 @@ Timeline::Timeline()
 void Timeline::schedule(TimelineEventStartDelegate startDelegate,
     TimelineTransitionDelegate transitionDelegate,
     TimelineEventEndDelegate endDelegate,
-    void *data, milliseconds delay, milliseconds duration)
+    void *data, milliseconds delay, milliseconds duration) {
+    schedule(startDelegate, transitionDelegate, endDelegate, data, delay, duration, millis());
+}
+
+void Timeline::schedule(TimelineEventStartDelegate startDelegate,
+    TimelineTransitionDelegate transitionDelegate,
+    TimelineEventEndDelegate endDelegate,
+    void *data, milliseconds delay, milliseconds duration, milliseconds currentMillis)
 {
     TimelineEntry *entry = getEntry();
     if (NULL == entry) {
@@ -24,7 +31,7 @@ void Timeline::schedule(TimelineEventStartDelegate startDelegate,
     entry->data = data;
     entry->used = true;
     entry->duration = duration;
-    entries.push(entry, millis() + delay);
+    entries.push(entry, currentMillis + delay);
 }
 
 void Timeline::tick() {

@@ -48,8 +48,14 @@ public:
         TimelineEventEndDelegate endDelegate,
         void *data, milliseconds delay, milliseconds duration);
 
+    void schedule(TimelineEventStartDelegate startDelegate,
+        TimelineTransitionDelegate transitionDelegate,
+        TimelineEventEndDelegate endDelegate,
+        void *data, milliseconds delay, milliseconds duration, milliseconds currentMillis);
+
     void tick();
     void tick(milliseconds currentMillis);
+    // Methods that contain `currentMillis` are for stabilizing the clock for testing
 };
 
 #endif // _Timeline_h

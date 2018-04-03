@@ -8,9 +8,13 @@ private:
     T contents[LENGTH];
 
 public:
-    List() {
+    void clear() {
         count = 0;
         memset(contents, 0, sizeof(T) * LENGTH);
+    }
+
+    List() {
+        clear();
     }
 
     void add(T entry) {
@@ -45,7 +49,7 @@ public:
             return;
         }
 
-        memmove(contents[index], contents[index + 1], sizeof(T) * (count - index - 1));
+        memmove(&contents[index], &contents[index + 1], sizeof(T) * (count - index - 1));
         count--;
     }
 
