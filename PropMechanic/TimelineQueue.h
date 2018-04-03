@@ -22,7 +22,7 @@ private:
     struct Entry {
         priority_t priority;
         entry_t id;
-        T *entry;
+        T entry;
         int nextIndex;
     };
 
@@ -54,7 +54,7 @@ public:
         }
     }
     
-    entry_t push(T* entry, priority_t itemPriority) {
+    entry_t push(T entry, priority_t itemPriority) {
         if (count >= LENGTH) {
             // ERROR
             return 0UL;
@@ -99,13 +99,13 @@ public:
     }
 
     
-    T *pop() {
+    T pop() {
         if (count == 0)
         {
             return NULL;
         }
         
-        T *returnEntry = contents[headIndex].entry;
+        T returnEntry = contents[headIndex].entry;
         contents[headIndex].entry = NULL;
         contents[headIndex].id = 0;
         

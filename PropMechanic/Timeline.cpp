@@ -8,7 +8,14 @@ Timeline::Timeline()
 void Timeline::schedule(TimelineEventStartDelegate startDelegate,
     TimelineTransitionDelegate transitionDelegate,
     TimelineEventEndDelegate endDelegate,
-    void *data, milliseconds delay, milliseconds duration)
+    void *data, milliseconds delay, milliseconds duration) {
+    schedule(startDelegate, transitionDelegate, endDelegate, data, delay, duration, millis());
+}
+
+void Timeline::schedule(TimelineEventStartDelegate startDelegate,
+    TimelineTransitionDelegate transitionDelegate,
+    TimelineEventEndDelegate endDelegate,
+    void *data, milliseconds delay, milliseconds duration, milliseconds currentMillis)
 {
     TimelineEntry *entry = getEntry();
     if (NULL == entry) {
@@ -24,13 +31,14 @@ void Timeline::schedule(TimelineEventStartDelegate startDelegate,
     entry->data = data;
     entry->used = true;
     entry->duration = duration;
-    entries.push(entry, millis() + delay);
+    entries.push(entry, currentMillis + delay);
 }
 
-void Timeline::tick()
-{
-    milliseconds currentMillis = millis();
-    
+void Timeline::tick() {
+    this->tick(millis());
+}
+
+void Timeline::tick(milliseconds currentMillis) {   
     // Start events
     if (entries.isNotEmpty() && entries.peakPriority() <= currentMillis) {
         TimelineEntry *entry = entries.pop();
@@ -48,17 +56,17 @@ void Timeline::tick()
             float transitionAmount = (float)(currentMillis - entry->startedAt) / (float)entry->duration;
             entry->transitionDelegate(transitionAmount, entry->data);
         }
-    }
 
-    // End/expire events
-    while(activeEntries.isNotEmpty() && activeEntries.get(0)->startedAt + activeEntries.get(0)->duration < currentMillis) {
-        TimelineEntry *entry = activeEntries.get(0);
-        if (NULL != entry->endDelegate) {
-            entry->endDelegate(entry->data);
+        if (entry->startedAt + entry->duration <= currentMillis) {
+            if (NULL != entry->endDelegate) {
+                entry->endDelegate(entry->data);
+            }
+
+            returnEntry(entry);
+            activeEntries.remove(i);
+            i--; // This is janky...
         }
-        returnEntry(entry);
-        activeEntries.remove();
-    }        
+    }
 }
 
 Timeline::TimelineEntry *Timeline::getEntry() {
