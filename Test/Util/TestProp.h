@@ -25,6 +25,7 @@ public:
     }
     
     void start(void *data) {
+        LOGF("Prop %p start", this);
         startCounter++;
         lastStartedAt = millis();
     }
@@ -46,6 +47,7 @@ public:
     }
     
     void end(void *data) {
+        LOGF("Prop %p end", this);
         endCounter++;
         lastEndedAt = millis();
     }

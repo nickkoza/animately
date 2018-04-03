@@ -14,18 +14,14 @@ void TimeSwitch::open(void *data)
 {
     digitalWrite(pin, TIME_SWITCH_OPEN_STATE);
     state = Open;
-    Serial.print("TIMESWITCH| - PIN ");
-    Serial.print(pin);
-    Serial.println(" - Open");
+    LOGF("TIMESWITCH - PIN %d OPEN", pin);
 }
 
 void TimeSwitch::close(void *data)
 {
     digitalWrite(pin, TIME_SWITCH_CLOSE_STATE);
     state = Closed;
-    Serial.print("TIMESWITCH| - PIN ");
-    Serial.print(pin);
-    Serial.println(" - Close");
+    LOGF("TIMESWITCH - PIN %d CLOSE", pin);
 }
 
 boolean TimeSwitch::isOpen()

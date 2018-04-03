@@ -28,19 +28,19 @@ public:
     }        
 
     void cueScene1(inputId id) {
-        Serial.println("Scene 1");
+        LOG("Scene 1");
         timeline->schedule(sparkingOn, NULL, sparkingOff, NULL, 0, 2250);
         timeline->schedule(motorOn, NULL, motorOff, NULL, 250, 2000);
     }
     
     void cueScene2(inputId id) {
-        Serial.println("Scene 2");
+        LOG("Scene 2");
         timeline->schedule(sparkingOn, NULL, sparkingOff, NULL, 0, 3250);
         timeline->schedule(motorOn, NULL, motorOff, NULL, 250, 3000);
     }
     
     void cueScene3(inputId id) {
-        Serial.println("Scene 3");
+        LOG("Scene 3");
         timeline->schedule(sparkingOn, NULL, sparkingOff, NULL, 0, 1250);
         timeline->schedule(motorOn, NULL, motorOff, NULL, 250, 1000);
     }
@@ -67,17 +67,9 @@ Button toneToggleButton(triggerD, 0, fastdelegate::MakeDelegate(&speaker, &Speak
 void setup() {
     Serial.begin(9600);
     
-    Serial.print("Timeline: ");
-    Serial.print(sizeof(timeline));
-    Serial.println(" bytes");
-    
-    Serial.print("Free: ");
-    Serial.print(freeMemory());
-    Serial.println(" bytes.");
-    
-    Serial.print("Delegates: ");
-    Serial.print(sizeof(fastdelegate::MakeDelegate(&scene, &Scene::cueScene1)));
-    Serial.println(" bytes each.");
+    LOGF("Timeline: %d bytes", sizeof(timeline));
+    LOGF("Free: %d bytes", freeMemory());
+    LOGF("Delegates: %d bytes each", sizeof(fastdelegate::MakeDelegate(&scene, &Scene::cueScene1)));
     
     speaker.playTone(60);
 }
