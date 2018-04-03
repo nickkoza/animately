@@ -3,23 +3,6 @@
 
 #include "List.h"
 
-class TestClass {
-private:
-    int num;
-public:
-    TestClass(int num) {
-        this->num = num;
-    }        
-
-    int getNum() {
-        return num;
-    }
-    
-    void setNum(int num) {
-        this->num = num;
-    }
-};
-
 List<int, 5> list;
 
 void resetList() {
