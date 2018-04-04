@@ -1,5 +1,7 @@
 #include "Button.h"
 
+using namespace PropMechanic;
+
 Button::Button(pinNum pin, inputId id, ButtonPressDelegate pressDelegate, ButtonHoldDelegate holdDelegate, ButtonReleaseDelegate releaseDelegate) {
     this->pin = pin;
     this->id = id;

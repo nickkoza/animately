@@ -3,6 +3,8 @@
 
 #include "List.h"
 
+using namespace PropMechanic;
+
 List<int, 5> list;
 
 void resetList() {

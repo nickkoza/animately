@@ -4,6 +4,8 @@
 #include "Timeline.h"
 #include "Util/TestProp.h"
 
+using namespace PropMechanic;
+
 TestProp prop1;
 TestProp prop2;
 TestProp prop3;

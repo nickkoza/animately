@@ -12,22 +12,23 @@
     #define TIME_SWITCH_CLOSE_STATE HIGH
 #endif
 
-class TimeSwitch
-{
-private:
-    enum State { Open = false, Closed = true };
+namespace PropMechanic {
+    class TimeSwitch
+    {
+    private:
+        enum State { Open = false, Closed = true };
 
-    pinNum pin;
-    milliseconds maxCloseDuration;
-    milliseconds minCooldownDuration;
-    boolean state;
-public:
-    TimeSwitch(pinNum pin, milliseconds maxCloseDuration, milliseconds minCooldownDuration);
+        pinNum pin;
+        milliseconds maxCloseDuration;
+        milliseconds minCooldownDuration;
+        boolean state;
+    public:
+        TimeSwitch(pinNum pin, milliseconds maxCloseDuration, milliseconds minCooldownDuration);
 
-    void open(void *data);
-    void close(void *data);
-    boolean isOpen();
-    boolean isClosed();
-};
-
+        void open(void *data);
+        void close(void *data);
+        boolean isOpen();
+        boolean isClosed();
+    };
+}
 #endif

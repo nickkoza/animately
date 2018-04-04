@@ -9,25 +9,26 @@
 // This class requires that you call the tick() method often.
 // This class is not designed for use with hardware interrupts, though you could modify
 // it for that use.
-class Button {
-public:
-    typedef fastdelegate::FastDelegate1<inputId> ButtonPressDelegate;
-    typedef fastdelegate::FastDelegate1<inputId> ButtonHoldDelegate;
-    typedef fastdelegate::FastDelegate1<inputId> ButtonReleaseDelegate;
-    
-private:
-    pinNum pin;
-    inputId id;
-    
-    ButtonPressDelegate pressDelegate;
-    ButtonHoldDelegate holdDelegate;
-    ButtonReleaseDelegate releaseDelegate;
+namespace PropMechanic {
+    class Button {
+        public:
+        typedef fastdelegate::FastDelegate1<inputId> ButtonPressDelegate;
+        typedef fastdelegate::FastDelegate1<inputId> ButtonHoldDelegate;
+        typedef fastdelegate::FastDelegate1<inputId> ButtonReleaseDelegate;
+        
+        private:
+        pinNum pin;
+        inputId id;
+        
+        ButtonPressDelegate pressDelegate;
+        ButtonHoldDelegate holdDelegate;
+        ButtonReleaseDelegate releaseDelegate;
 
-    boolean pressed;
+        boolean pressed;
 
-public:
-    Button(pinNum pin, inputId id, ButtonPressDelegate pressDelegate, ButtonHoldDelegate holdDelegate, ButtonReleaseDelegate releaseDelegate);
-    void tick();
-};
-
+        public:
+        Button(pinNum pin, inputId id, ButtonPressDelegate pressDelegate, ButtonHoldDelegate holdDelegate, ButtonReleaseDelegate releaseDelegate);
+        void tick();
+    };
+}
 #endif /* BUTTON_H_ */

@@ -4,6 +4,8 @@
 #include "Speaker.h"
 #include "Memory.h"
 
+using namespace PropMechanic;
+
 class Scene {
 private:
     Timeline *timeline;

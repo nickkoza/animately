@@ -1,5 +1,7 @@
 #include "Timeline.h"
 
+using namespace PropMechanic;
+
 Timeline::Timeline()
 {
     memset(entriesPool, 0, sizeof(TimelineEntry) * TIMELINE_MAX_SCHEDULED_ENTRIES);

@@ -1,5 +1,6 @@
 #include "TimeSwitch.h"
 
+using namespace PropMechanic;
 
 TimeSwitch::TimeSwitch(pinNum pin, milliseconds maxCloseDuration, milliseconds minCooldownDuration)
 {
