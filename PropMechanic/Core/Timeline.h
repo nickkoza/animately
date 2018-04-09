@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-#include "PropMechanic.h"
+#include "../PropMechanic.h"
 #include "TimelineQueue.h"
 #include "List.h"
 #include "FastDelegate.h"

@@ -1,7 +1,7 @@
 #ifndef TIMELINETEST_H_
 #define TIMELINETEST_H_
 
-#include "Timeline.h"
+#include "Core/Timeline.h"
 #include "Util/TestProp.h"
 
 using namespace PropMechanic;

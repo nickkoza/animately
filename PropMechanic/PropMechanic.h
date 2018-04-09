@@ -47,4 +47,14 @@ typedef unsigned long milliseconds;
 typedef char pinNum;
 typedef char inputId;
 
+struct IntRange {
+    int min;
+    int max;
+};
+
+struct MillisecondRange {
+    milliseconds min;
+    milliseconds max;
+};
+
 #endif // _PropMechanic_h

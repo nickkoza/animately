@@ -2,7 +2,7 @@
 #define _TimeSwitch_h
 
 #include "Arduino.h"
-#include "PropMechanic.h"
+#include "../PropMechanic.h"
 
 #ifndef TIME_SWITCH_OPEN_STATE
     #define TIME_SWITCH_OPEN_STATE LOW

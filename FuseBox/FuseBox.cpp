@@ -1,6 +1,6 @@
-﻿#include "Timeline.h"
-#include "TimeSwitch.h"
-#include "Button.h"
+﻿#include "Core/Timeline.h"
+#include "Parts/TimeSwitch.h"
+#include "Parts/Button.h"
 #include "Speaker.h"
 #include "Memory.h"
 

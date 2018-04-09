@@ -17,6 +17,11 @@ Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "ArduinoCore", "ArduinoCore\
 EndProject
 Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "Test", "Test\Test.cppproj", "{88F31A3C-46C8-4AFD-B2D5-B2BFBE22F1A3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{80E3E531-FC51-4698-AB7F-7478916C422A}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR
