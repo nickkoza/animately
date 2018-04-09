@@ -2,7 +2,7 @@
 
 using namespace PropMechanic;
 
-Flicker::Flicker(ValueRange valueRange, IdleDurationRange idleDuration, TransitionDurationRange transitionDuration, SustainDurationRange sustainDuration) {
+Flicker::Flicker(FloatRange valueRange, IdleDurationRange idleDuration, TransitionDurationRange transitionDuration, SustainDurationRange sustainDuration) {
     this->valueRange = valueRange;
     this->idleDuration = idleDuration;
     this->transitionDuration = transitionDuration;
@@ -10,9 +10,9 @@ Flicker::Flicker(ValueRange valueRange, IdleDurationRange idleDuration, Transiti
     goToState(STOPPED);
 }
 
-int Flicker::getValue() {
+float Flicker::getValue(float transitionAmount, void *data) {
     milliseconds currentTime = millis();
-
+    
     if (state == IDLING) {
         if (currentTime > stateEntryTime + currentStateDuration) {
             goToState(TRANSITION_UP);

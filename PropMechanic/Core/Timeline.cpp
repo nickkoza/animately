@@ -9,26 +9,29 @@ Timeline::Timeline()
 
 void Timeline::schedule(TimelineEventStartDelegate startDelegate,
     TimelineTransitionDelegate transitionDelegate,
+    TimelineTweenDelegate tweenDelegate,
     TimelineEventEndDelegate endDelegate,
-    void *data, milliseconds delay, milliseconds duration) {
-    schedule(startDelegate, transitionDelegate, endDelegate, data, delay, duration, millis());
+    milliseconds delay, milliseconds duration, void *data) {
+    schedule(startDelegate, transitionDelegate, tweenDelegate, endDelegate, delay, duration, data, millis());
 }
 
 void Timeline::schedule(TimelineEventStartDelegate startDelegate,
     TimelineTransitionDelegate transitionDelegate,
+    TimelineTweenDelegate tweenDelegate,
     TimelineEventEndDelegate endDelegate,
-    void *data, milliseconds delay, milliseconds duration, milliseconds currentMillis)
+    milliseconds delay, milliseconds duration, void *data, milliseconds currentMillis)
 {
     TimelineEntry *entry = getEntry();
     if (NULL == entry) {
         ERROR(COULD_NOT_SCHEDULE);
         return;
     }
-    
+
     LOG("Scheduled entry");
-    
+
     entry->startDelegate = startDelegate;
     entry->transitionDelegate = transitionDelegate;
+    entry->tweenDelegate = tweenDelegate;
     entry->endDelegate = endDelegate;
     entry->data = data;
     entry->used = true;
@@ -56,6 +59,11 @@ void Timeline::tick(milliseconds currentMillis) {
         TimelineEntry *entry = activeEntries.get(i);
         if (NULL != entry->transitionDelegate) {
             float transitionAmount = (float)(currentMillis - entry->startedAt) / (float)entry->duration;
+            
+            if (NULL != entry->tweenDelegate) {
+                transitionAmount = entry->tweenDelegate(transitionAmount, entry->data);
+            }
+            
             entry->transitionDelegate(transitionAmount, entry->data);
         }
 

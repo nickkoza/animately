@@ -1,10 +1,12 @@
 #ifndef TWEEN_H_
 #define TWEEN_H_
 
+#include "../PropMechanic.h"
+
 namespace PropMechanic {
     class Tween {
     public:  
-        virtual int getValue() = 0;
+        virtual float getValue(float transitionAmount, void *data) = 0;
     };
 }
 

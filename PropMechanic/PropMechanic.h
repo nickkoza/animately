@@ -31,7 +31,7 @@
 #endif
 
 
-// MISC
+// LOGGING
 #ifndef LOG
     #define LOG_BUFFER_SIZE 60
     extern char logBuffer[LOG_BUFFER_SIZE];
@@ -43,6 +43,10 @@
     #define ERROR(msg) Serial.println(msg);
 #endif
 
+
+// MISC
+#define DELEGATE(args...) fastdelegate::MakeDelegate(args)
+
 typedef unsigned long milliseconds;
 typedef char pinNum;
 typedef char inputId;
@@ -50,6 +54,11 @@ typedef char inputId;
 struct IntRange {
     int min;
     int max;
+};
+
+struct FloatRange {
+    float min;
+    float max;
 };
 
 struct MillisecondRange {

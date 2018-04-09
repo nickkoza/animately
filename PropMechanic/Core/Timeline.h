@@ -18,12 +18,14 @@ namespace PropMechanic {
     public:
         typedef fastdelegate::FastDelegate1<void*> TimelineEventStartDelegate;
         typedef fastdelegate::FastDelegate2<float, void*> TimelineTransitionDelegate;
+        typedef fastdelegate::FastDelegate2<float, void*, float> TimelineTweenDelegate;
         typedef fastdelegate::FastDelegate1<void*> TimelineEventEndDelegate;
 
     private:
         struct TimelineEntry {
             TimelineEventStartDelegate startDelegate;
             TimelineTransitionDelegate transitionDelegate;
+            TimelineTweenDelegate tweenDelegate;
             TimelineEventEndDelegate endDelegate;
             void *data;
             milliseconds startedAt;
@@ -46,13 +48,15 @@ namespace PropMechanic {
 
         void schedule(TimelineEventStartDelegate startDelegate,
             TimelineTransitionDelegate transitionDelegate,
+            TimelineTweenDelegate tweenDelegate,
             TimelineEventEndDelegate endDelegate,
-            void *data, milliseconds delay, milliseconds duration);
+            milliseconds delay, milliseconds duration, void *data);
 
         void schedule(TimelineEventStartDelegate startDelegate,
             TimelineTransitionDelegate transitionDelegate,
+            TimelineTweenDelegate tweenDelegate,
             TimelineEventEndDelegate endDelegate,
-            void *data, milliseconds delay, milliseconds duration, milliseconds currentMillis);
+            milliseconds delay, milliseconds duration, void *data, milliseconds currentMillis);
 
         void tick();
         void tick(milliseconds currentMillis);

@@ -18,8 +18,9 @@ test(basicScheduling)
     timeline.schedule(
         fastdelegate::MakeDelegate(&prop1, &TestProp::start),
         fastdelegate::MakeDelegate(&prop1, &TestProp::transition),
+        NULL,
         fastdelegate::MakeDelegate(&prop1, &TestProp::end),
-        NULL, 5, 10, 0);
+        5, 10, NULL, 0);
 
     for (int i = 0; i < 20; i++) {
         timeline.tick(i);
@@ -40,20 +41,23 @@ test(interlacedSchedulings)
     timeline.schedule(
         fastdelegate::MakeDelegate(&prop1, &TestProp::start),
         fastdelegate::MakeDelegate(&prop1, &TestProp::transition),
+        NULL,
         fastdelegate::MakeDelegate(&prop1, &TestProp::end),
-        NULL, 20, 40, 0);
+        20, 40, NULL, 0);
         
     timeline.schedule(
         fastdelegate::MakeDelegate(&prop2, &TestProp::start),
         fastdelegate::MakeDelegate(&prop2, &TestProp::transition),
+        NULL,
         fastdelegate::MakeDelegate(&prop2, &TestProp::end),
-        NULL, 10, 80, 0);
+        10, 80, NULL, 0);
         
     timeline.schedule(
         fastdelegate::MakeDelegate(&prop3, &TestProp::start),
         fastdelegate::MakeDelegate(&prop3, &TestProp::transition),
+        NULL,
         fastdelegate::MakeDelegate(&prop3, &TestProp::end),
-        NULL, 30, 10, 0);
+        30, 10, NULL, 0);
 
     for (int i = 0; i < 100; i++) {
         timeline.tick(i);

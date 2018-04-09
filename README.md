@@ -3,6 +3,8 @@ Prop Mechanic is an Arduino library that allows for precise animation of props. 
 
 Prop Mechanic is optimized for integrated systems and has a memory footprint that can be tuned based on the needs of the prop and microcontroller.
 
+Prop Mechanic is built around delegates, and uses an event-driven architecture. This provides a flexible API that's easy to build upon and plug new methods into. If a method signature matches what Prop Mechanic is expecting you can plug that method in to the system regardless of whether you've inherited any interfaces. This means you can create new parts and tweening algorithms as you go.
+
 # Installation
 TO DO
 

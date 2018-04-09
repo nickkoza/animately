@@ -2,26 +2,21 @@
 
 using namespace PropMechanic;
 
-LED::LED(pinNum pin, Tween *tween)
+LED::LED(pinNum pin)
 {
     this->pin = pin;
     pinMode(pin, OUTPUT);
     analogWrite(pin, 0);
-    this->tween = tween;
 }
 
 void LED::set(int brightness) {
     analogWrite(pin, brightness);
 }
 
-void LED::animate() {
-    if (NULL == tween) {
-        return;
-    }
-    
-    set(tween->getValue());
+void LED::setf(float brightness, void *data) {
+    set(255.0f * brightness);
 }
 
-void LED::off() {
+void LED::off(void *data) {
     set(0);
 }    
