@@ -11,14 +11,14 @@ TimeSwitch::TimeSwitch(pinNum pin, milliseconds maxCloseDuration, milliseconds m
     state = Open;
 }
 
-void TimeSwitch::open(void *data)
+void TimeSwitch::open(int val)
 {
     digitalWrite(pin, TIME_SWITCH_OPEN_STATE);
     state = Open;
     LOGF("TIMESWITCH - PIN %d OPEN", pin);
 }
 
-void TimeSwitch::close(void *data)
+void TimeSwitch::close(int val)
 {
     digitalWrite(pin, TIME_SWITCH_CLOSE_STATE);
     state = Closed;

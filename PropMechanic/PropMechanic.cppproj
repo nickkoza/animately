@@ -176,37 +176,52 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Button.cpp">
+    <Compile Include="Core\FastDelegate.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Button.h">
+    <Compile Include="Core\List.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="FastDelegate.h">
+    <Compile Include="Core\Timeline.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="List.h">
+    <Compile Include="Core\Timeline.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Core\TimelineQueue.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Parts\Button.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Parts\Button.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Parts\LED.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Parts\LED.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Parts\TimeSwitch.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Parts\TimeSwitch.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="PropMechanic.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="TimelineQueue.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="PropMechanic.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Timeline.cpp">
+    <Compile Include="Tweens\Flicker.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Timeline.h">
+    <Compile Include="Tweens\Flicker.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="TimeSwitch.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="TimeSwitch.h">
+    <Compile Include="Tweens\Tween.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
@@ -216,6 +231,11 @@
       <Project>{a03c0ad2-0a3b-42e3-8342-c38f098e5668}</Project>
       <Private>True</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core" />
+    <Folder Include="Tweens" />
+    <Folder Include="Parts" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

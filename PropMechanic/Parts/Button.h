@@ -2,8 +2,8 @@
 #define BUTTON_H_
 
 #include "Arduino.h"
-#include "FastDelegate.h"
-#include "PropMechanic.h"
+#include "../Core/FastDelegate.h"
+#include "../PropMechanic.h"
 
 // Button provides a basic interface for calling delegates and de-bouncing button inputs.
 // This class requires that you call the tick() method often.

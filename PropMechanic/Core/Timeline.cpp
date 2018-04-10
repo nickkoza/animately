@@ -7,32 +7,50 @@ Timeline::Timeline()
     memset(entriesPool, 0, sizeof(TimelineEntry) * TIMELINE_MAX_SCHEDULED_ENTRIES);
 }
 
-void Timeline::schedule(TimelineEventStartDelegate startDelegate,
+void Timeline::schedule(int fromValue, int toValue, milliseconds delay, milliseconds duration,
+    TimelineEventStartDelegate startDelegate,
     TimelineTransitionDelegate transitionDelegate,
-    TimelineEventEndDelegate endDelegate,
-    void *data, milliseconds delay, milliseconds duration) {
-    schedule(startDelegate, transitionDelegate, endDelegate, data, delay, duration, millis());
+    TimelineTweenDelegate tweenDelegate,
+    TimelineEventEndDelegate endDelegate) {
+    schedule(fromValue, toValue, delay, duration, startDelegate, transitionDelegate, tweenDelegate, endDelegate, millis());
 }
 
-void Timeline::schedule(TimelineEventStartDelegate startDelegate,
-    TimelineTransitionDelegate transitionDelegate,
+void Timeline::schedule(milliseconds delay, milliseconds duration,
+    TimelineEventStartDelegate startDelegate,
+    TimelineEventEndDelegate endDelegate) {
+    schedule(0, 0, delay, duration, startDelegate, NULL, NULL, endDelegate);
+}
+
+void Timeline::schedule(milliseconds delay, milliseconds duration,
+    TimelineEventStartDelegate startDelegate,
     TimelineEventEndDelegate endDelegate,
-    void *data, milliseconds delay, milliseconds duration, milliseconds currentMillis)
+    milliseconds currentMillis) {
+    schedule(0, 0, delay, duration, startDelegate, NULL, NULL, endDelegate, currentMillis);
+}
+
+void Timeline::schedule(int fromValue, int toValue, milliseconds delay, milliseconds duration,
+    TimelineEventStartDelegate startDelegate,
+    TimelineTransitionDelegate transitionDelegate,
+    TimelineTweenDelegate tweenDelegate,
+    TimelineEventEndDelegate endDelegate,
+    milliseconds currentMillis)
 {
     TimelineEntry *entry = getEntry();
     if (NULL == entry) {
         ERROR(COULD_NOT_SCHEDULE);
         return;
     }
-    
+
     LOG("Scheduled entry");
-    
+
+    entry->fromValue = fromValue;
+    entry->toValue = toValue;
+    entry->duration = duration;
     entry->startDelegate = startDelegate;
     entry->transitionDelegate = transitionDelegate;
+    entry->tweenDelegate = tweenDelegate;
     entry->endDelegate = endDelegate;
-    entry->data = data;
     entry->used = true;
-    entry->duration = duration;
     entries.push(entry, currentMillis + delay);
 }
 
@@ -47,7 +65,7 @@ void Timeline::tick(milliseconds currentMillis) {
         entry->startedAt = currentMillis;
         activeEntries.add(entry);
         if (NULL != entry->startDelegate) {
-            entry->startDelegate(entry->data);
+            entry->startDelegate(entry->fromValue);
         }
     }
     
@@ -56,12 +74,17 @@ void Timeline::tick(milliseconds currentMillis) {
         TimelineEntry *entry = activeEntries.get(i);
         if (NULL != entry->transitionDelegate) {
             float transitionAmount = (float)(currentMillis - entry->startedAt) / (float)entry->duration;
-            entry->transitionDelegate(transitionAmount, entry->data);
+            
+            if (NULL != entry->tweenDelegate) {
+                transitionAmount = entry->tweenDelegate(transitionAmount);
+            }
+            
+            entry->transitionDelegate(round(transitionAmount * (entry->toValue - entry->fromValue)) + entry->fromValue);
         }
 
         if (entry->startedAt + entry->duration <= currentMillis) {
             if (NULL != entry->endDelegate) {
-                entry->endDelegate(entry->data);
+                entry->endDelegate(entry->toValue);
             }
 
             returnEntry(entry);

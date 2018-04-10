@@ -1,6 +1,8 @@
-﻿#include "Timeline.h"
-#include "TimeSwitch.h"
-#include "Button.h"
+﻿#include "Core/Timeline.h"
+#include "Parts/TimeSwitch.h"
+#include "Parts/Button.h"
+#include "Parts/LED.h"
+#include "Tweens/Flicker.h"
 #include "Speaker.h"
 #include "Memory.h"
 
@@ -8,43 +10,80 @@ using namespace PropMechanic;
 
 class Scene {
 private:
+    static const int numberOfLEDs = 3;
     Timeline *timeline;
     TimeSwitch *sparkSwitch;
     TimeSwitch *motorSwitch;
-    
-    Timeline::TimelineEventStartDelegate sparkingOn;
-    Timeline::TimelineEventEndDelegate sparkingOff;
-    Timeline::TimelineEventStartDelegate motorOn;
-    Timeline::TimelineEventEndDelegate motorOff;
+    LED *sparkLEDs[numberOfLEDs];
+    Tween *sparkTweenInstance;
 
 public:
-    Scene(Timeline *timeline, TimeSwitch *sparkSwitch, TimeSwitch *motorSwitch) {
+    Scene(Timeline *timeline, TimeSwitch *sparkSwitch, TimeSwitch *motorSwitch, LED *sparkLEDs[], Tween *sparkTweenInstance) {
         this->timeline = timeline;
         this->sparkSwitch = sparkSwitch;
         this->motorSwitch = motorSwitch;
-        
-        sparkingOn = fastdelegate::MakeDelegate(sparkSwitch, &TimeSwitch::close);
-        sparkingOff = fastdelegate::MakeDelegate(sparkSwitch, &TimeSwitch::open);
-        motorOn = fastdelegate::MakeDelegate(motorSwitch, &TimeSwitch::close);
-        motorOff = fastdelegate::MakeDelegate(motorSwitch, &TimeSwitch::open);
-    }        
+        memcpy(this->sparkLEDs, sparkLEDs, sizeof(LED*) * numberOfLEDs);
+        this->sparkTweenInstance = sparkTweenInstance;
+    }
 
     void cueScene1(inputId id) {
         LOG("Scene 1");
-        timeline->schedule(sparkingOn, NULL, sparkingOff, NULL, 0, 2250);
-        timeline->schedule(motorOn, NULL, motorOff, NULL, 250, 2000);
+        
+        timeline->schedule(0, 2250,
+            DELEGATE(sparkSwitch, &TimeSwitch::close),
+            DELEGATE(sparkSwitch, &TimeSwitch::open));
+
+        timeline->schedule(250, 2000,
+            DELEGATE(motorSwitch, &TimeSwitch::close),
+            DELEGATE(motorSwitch, &TimeSwitch::open));
+
+        for (int i = 0; i < numberOfLEDs; i++) {
+            timeline->schedule(0, 255, 250, 2000,
+                NULL,
+                DELEGATE(sparkLEDs[i], &LED::set),
+                DELEGATE(sparkTweenInstance, &Tween::getValue),
+                DELEGATE(sparkLEDs[i], &LED::off));
+        }
     }
     
     void cueScene2(inputId id) {
         LOG("Scene 2");
-        timeline->schedule(sparkingOn, NULL, sparkingOff, NULL, 0, 3250);
-        timeline->schedule(motorOn, NULL, motorOff, NULL, 250, 3000);
+        
+        timeline->schedule(0, 3250,
+            DELEGATE(sparkSwitch, &TimeSwitch::close),
+            DELEGATE(sparkSwitch, &TimeSwitch::open));
+
+        timeline->schedule(250, 3000,
+            DELEGATE(motorSwitch, &TimeSwitch::close),
+            DELEGATE(motorSwitch, &TimeSwitch::open));
+
+        for (int i = 0; i < numberOfLEDs; i++) {
+            timeline->schedule(0, 255, 250, 3000,
+                NULL,
+                DELEGATE(sparkLEDs[i], &LED::set),
+                DELEGATE(sparkTweenInstance, &Tween::getValue),
+                DELEGATE(sparkLEDs[i], &LED::off));
+        }
     }
     
     void cueScene3(inputId id) {
         LOG("Scene 3");
-        timeline->schedule(sparkingOn, NULL, sparkingOff, NULL, 0, 1250);
-        timeline->schedule(motorOn, NULL, motorOff, NULL, 250, 1000);
+        
+        timeline->schedule(0, 1250,
+            DELEGATE(sparkSwitch, &TimeSwitch::close),
+            DELEGATE(sparkSwitch, &TimeSwitch::open));
+
+        timeline->schedule(250, 1000,
+            DELEGATE(motorSwitch, &TimeSwitch::close),
+            DELEGATE(motorSwitch, &TimeSwitch::open));
+
+        for (int i = 0; i < numberOfLEDs; i++) {
+            timeline->schedule(0, 255, 250, 1000,
+                NULL,
+                DELEGATE(sparkLEDs[i], &LED::set),
+                DELEGATE(sparkTweenInstance, &Tween::getValue),
+                DELEGATE(sparkLEDs[i], &LED::off));
+        }
     }
 };
 
@@ -53,7 +92,19 @@ TimeSwitch sparkSwitch(6, 3000L, 5000L);
 TimeSwitch motorSwitch(7, 5000L, 100L);
 Speaker speaker(8, 60);
 
-Scene scene(&timeline, &sparkSwitch, &motorSwitch);
+Flicker sparkTween({0, 255}, {15, 50}, {2, 10}, {15, 50});
+
+int numberOfLEDs = 3;
+LED sparkLED1(9);
+LED sparkLED2(10);
+LED sparkLED3(11);
+LED *sparkLEDs[] = {
+    &sparkLED1,
+    &sparkLED2,
+    &sparkLED3
+};
+
+Scene scene(&timeline, &sparkSwitch, &motorSwitch, sparkLEDs, &sparkTween);
 
 const int triggerA = A3;
 const int triggerB = A1;
@@ -64,7 +115,6 @@ Button scene1Button(triggerA, 0, fastdelegate::MakeDelegate(&scene, &Scene::cueS
 Button scene2Button(triggerB, 0, fastdelegate::MakeDelegate(&scene, &Scene::cueScene2), NULL, NULL);
 Button scene3Button(triggerC, 0, fastdelegate::MakeDelegate(&scene, &Scene::cueScene3), NULL, NULL);
 Button toneToggleButton(triggerD, 0, fastdelegate::MakeDelegate(&speaker, &Speaker::toggleTone), NULL, NULL);
-
 
 void setup() {
     Serial.begin(9600);

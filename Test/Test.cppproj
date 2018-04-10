@@ -298,6 +298,9 @@
     <Compile Include="TimelineTest.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Util\TestInverseTween.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Util\TestProp.h">
       <SubType>compile</SubType>
     </Compile>

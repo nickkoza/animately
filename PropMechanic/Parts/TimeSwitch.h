@@ -2,7 +2,7 @@
 #define _TimeSwitch_h
 
 #include "Arduino.h"
-#include "PropMechanic.h"
+#include "../PropMechanic.h"
 
 #ifndef TIME_SWITCH_OPEN_STATE
     #define TIME_SWITCH_OPEN_STATE LOW
@@ -25,8 +25,8 @@ namespace PropMechanic {
     public:
         TimeSwitch(pinNum pin, milliseconds maxCloseDuration, milliseconds minCooldownDuration);
 
-        void open(void *data);
-        void close(void *data);
+        void open(int val);
+        void close(int val);
         boolean isOpen();
         boolean isClosed();
     };

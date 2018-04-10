@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-#include "PropMechanic.h"
+#include "../PropMechanic.h"
 #include "TimelineQueue.h"
 #include "List.h"
 #include "FastDelegate.h"
@@ -16,16 +16,19 @@ namespace PropMechanic {
     class Timeline
     {
     public:
-        typedef fastdelegate::FastDelegate1<void*> TimelineEventStartDelegate;
-        typedef fastdelegate::FastDelegate2<float, void*> TimelineTransitionDelegate;
-        typedef fastdelegate::FastDelegate1<void*> TimelineEventEndDelegate;
+        typedef fastdelegate::FastDelegate1<int> TimelineEventStartDelegate;
+        typedef fastdelegate::FastDelegate1<int> TimelineTransitionDelegate;
+        typedef fastdelegate::FastDelegate1<float, float> TimelineTweenDelegate;
+        typedef fastdelegate::FastDelegate1<int> TimelineEventEndDelegate;
 
     private:
         struct TimelineEntry {
             TimelineEventStartDelegate startDelegate;
             TimelineTransitionDelegate transitionDelegate;
+            TimelineTweenDelegate tweenDelegate;
             TimelineEventEndDelegate endDelegate;
-            void *data;
+            int fromValue;
+            int toValue;
             milliseconds startedAt;
             milliseconds duration;
             boolean used;
@@ -44,15 +47,27 @@ namespace PropMechanic {
 
         Timeline();
 
-        void schedule(TimelineEventStartDelegate startDelegate,
+        void schedule(int fromValue, int toValue, milliseconds delay, milliseconds duration,
+            TimelineEventStartDelegate startDelegate,
             TimelineTransitionDelegate transitionDelegate,
-            TimelineEventEndDelegate endDelegate,
-            void *data, milliseconds delay, milliseconds duration);
+            TimelineTweenDelegate tweenDelegate,
+            TimelineEventEndDelegate endDelegate);
 
-        void schedule(TimelineEventStartDelegate startDelegate,
+        void schedule(int fromValue, int toValue, milliseconds delay, milliseconds duration,
+            TimelineEventStartDelegate startDelegate,
             TimelineTransitionDelegate transitionDelegate,
+            TimelineTweenDelegate tweenDelegate,
             TimelineEventEndDelegate endDelegate,
-            void *data, milliseconds delay, milliseconds duration, milliseconds currentMillis);
+            milliseconds currentMillis);
+            
+        void schedule(milliseconds delay, milliseconds duration,
+            TimelineEventStartDelegate startDelegate,
+            TimelineEventEndDelegate endDelegate);
+            
+        void schedule(milliseconds delay, milliseconds duration,
+            TimelineEventStartDelegate startDelegate,
+            TimelineEventEndDelegate endDelegate,
+            milliseconds currentMillis);
 
         void tick();
         void tick(milliseconds currentMillis);
