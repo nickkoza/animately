@@ -25,8 +25,8 @@ namespace PropMechanic {
     public:
         TimeSwitch(pinNum pin, milliseconds maxCloseDuration, milliseconds minCooldownDuration);
 
-        void open(void *data);
-        void close(void *data);
+        void open(int val);
+        void close(int val);
         boolean isOpen();
         boolean isClosed();
     };

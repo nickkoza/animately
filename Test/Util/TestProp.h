@@ -24,7 +24,7 @@ public:
         reset();
     }
     
-    void start(void *data) {
+    void start(int value) {
         LOGF("Prop %p start", this);
         startCounter++;
         lastStartedAt = millis();
@@ -38,7 +38,7 @@ public:
         return lastStartedAt;
     }
     
-    void transition(float amount, void *data) {
+    void transition(int value) {
         transitionCounter++;
     }
     
@@ -46,7 +46,7 @@ public:
         return transitionCounter;
     }
     
-    void end(void *data) {
+    void end(int value) {
         LOGF("Prop %p end", this);
         endCounter++;
         lastEndedAt = millis();

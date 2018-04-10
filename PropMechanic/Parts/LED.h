@@ -11,10 +11,9 @@ namespace PropMechanic {
         pinNum pin;
 
     public:
-	    LED(pinNum pin);
+        LED(pinNum pin);
         void set(int brightness);
-        void setf(float brightness, void *data);
-        void off(void *data);
+        void off(int val);
     };
 }
 

@@ -6,7 +6,7 @@
 namespace PropMechanic {
     class Tween {
     public:  
-        virtual float getValue(float transitionAmount, void *data) = 0;
+        virtual float getValue(float transitionAmount) = 0;
     };
 }
 

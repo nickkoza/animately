@@ -35,7 +35,7 @@ namespace PropMechanic {
         
     public:
         Flicker(FloatRange valueRange, IdleDurationRange idleDuration, TransitionDurationRange transitionDuration, SustainDurationRange sustainDuration);
-        float getValue(float transitionAmount, void *data);
+        float getValue(float transitionAmount);
     };
 }
 

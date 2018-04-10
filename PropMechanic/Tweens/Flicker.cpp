@@ -10,7 +10,7 @@ Flicker::Flicker(FloatRange valueRange, IdleDurationRange idleDuration, Transiti
     goToState(STOPPED);
 }
 
-float Flicker::getValue(float transitionAmount, void *data) {
+float Flicker::getValue(float transitionAmount) {
     milliseconds currentTime = millis();
     
     if (state == IDLING) {
