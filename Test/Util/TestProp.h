@@ -10,6 +10,7 @@ private:
     int transitionCounter;
     int endCounter;
     milliseconds lastEndedAt;
+    int value;
     
 public:
     void reset() {
@@ -18,6 +19,7 @@ public:
         transitionCounter = 0;
         endCounter = 0;
         lastEndedAt = 0;
+        value = 0;
     }
     
     TestProp() {
@@ -28,6 +30,7 @@ public:
         LOGF("Prop %p start", this);
         startCounter++;
         lastStartedAt = millis();
+        this->value = value;
     }
     
     int getStarted() {
@@ -40,6 +43,7 @@ public:
     
     void transition(int value) {
         transitionCounter++;
+        this->value = value;
     }
     
     int getTransitioned() {
@@ -50,6 +54,7 @@ public:
         LOGF("Prop %p end", this);
         endCounter++;
         lastEndedAt = millis();
+        this->value = value;
     }
     
     int getEnded() {
@@ -58,6 +63,10 @@ public:
     
     milliseconds getLastEndedAt() {
         return lastEndedAt;
+    }
+    
+    int getValue() {
+        return value;
     }
 };
 

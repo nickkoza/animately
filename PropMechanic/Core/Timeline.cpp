@@ -15,6 +15,19 @@ void Timeline::schedule(int fromValue, int toValue, milliseconds delay, millisec
     schedule(fromValue, toValue, delay, duration, startDelegate, transitionDelegate, tweenDelegate, endDelegate, millis());
 }
 
+void Timeline::schedule(milliseconds delay, milliseconds duration,
+    TimelineEventStartDelegate startDelegate,
+    TimelineEventEndDelegate endDelegate) {
+    schedule(0, 0, delay, duration, startDelegate, NULL, NULL, endDelegate);
+}
+
+void Timeline::schedule(milliseconds delay, milliseconds duration,
+    TimelineEventStartDelegate startDelegate,
+    TimelineEventEndDelegate endDelegate,
+    milliseconds currentMillis) {
+    schedule(0, 0, delay, duration, startDelegate, NULL, NULL, endDelegate, currentMillis);
+}
+
 void Timeline::schedule(int fromValue, int toValue, milliseconds delay, milliseconds duration,
     TimelineEventStartDelegate startDelegate,
     TimelineTransitionDelegate transitionDelegate,
@@ -66,7 +79,7 @@ void Timeline::tick(milliseconds currentMillis) {
                 transitionAmount = entry->tweenDelegate(transitionAmount);
             }
             
-            entry->transitionDelegate(transitionAmount * (entry->toValue - entry->fromValue) + entry->fromValue);
+            entry->transitionDelegate(round(transitionAmount * (entry->toValue - entry->fromValue)) + entry->fromValue);
         }
 
         if (entry->startedAt + entry->duration <= currentMillis) {

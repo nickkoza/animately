@@ -29,16 +29,12 @@ public:
     void cueScene1(inputId id) {
         LOG("Scene 1");
         
-        timeline->schedule(0, 0, 0, 2250,
+        timeline->schedule(0, 2250,
             DELEGATE(sparkSwitch, &TimeSwitch::close),
-            NULL,
-            NULL,
             DELEGATE(sparkSwitch, &TimeSwitch::open));
 
-        timeline->schedule(0, 0, 250, 2000,
+        timeline->schedule(250, 2000,
             DELEGATE(motorSwitch, &TimeSwitch::close),
-            NULL,
-            NULL,
             DELEGATE(motorSwitch, &TimeSwitch::open));
 
         for (int i = 0; i < numberOfLEDs; i++) {
@@ -53,16 +49,12 @@ public:
     void cueScene2(inputId id) {
         LOG("Scene 2");
         
-        timeline->schedule(0, 0, 0, 3250,
+        timeline->schedule(0, 3250,
             DELEGATE(sparkSwitch, &TimeSwitch::close),
-            NULL,
-            NULL,
             DELEGATE(sparkSwitch, &TimeSwitch::open));
 
-        timeline->schedule(0, 0, 250, 3000,
+        timeline->schedule(250, 3000,
             DELEGATE(motorSwitch, &TimeSwitch::close),
-            NULL,
-            NULL,
             DELEGATE(motorSwitch, &TimeSwitch::open));
 
         for (int i = 0; i < numberOfLEDs; i++) {
@@ -77,24 +69,20 @@ public:
     void cueScene3(inputId id) {
         LOG("Scene 3");
         
-        timeline->schedule(0, 0, 0, 1250,
-        DELEGATE(sparkSwitch, &TimeSwitch::close),
-        NULL,
-        NULL,
-        DELEGATE(sparkSwitch, &TimeSwitch::open));
+        timeline->schedule(0, 1250,
+            DELEGATE(sparkSwitch, &TimeSwitch::close),
+            DELEGATE(sparkSwitch, &TimeSwitch::open));
 
-        timeline->schedule(0, 0, 250, 1000,
-        DELEGATE(motorSwitch, &TimeSwitch::close),
-        NULL,
-        NULL,
-        DELEGATE(motorSwitch, &TimeSwitch::open));
+        timeline->schedule(250, 1000,
+            DELEGATE(motorSwitch, &TimeSwitch::close),
+            DELEGATE(motorSwitch, &TimeSwitch::open));
 
         for (int i = 0; i < numberOfLEDs; i++) {
             timeline->schedule(0, 255, 250, 1000,
-            NULL,
-            DELEGATE(sparkLEDs[i], &LED::set),
-            DELEGATE(sparkTweenInstance, &Tween::getValue),
-            DELEGATE(sparkLEDs[i], &LED::off));
+                NULL,
+                DELEGATE(sparkLEDs[i], &LED::set),
+                DELEGATE(sparkTweenInstance, &Tween::getValue),
+                DELEGATE(sparkLEDs[i], &LED::off));
         }
     }
 };

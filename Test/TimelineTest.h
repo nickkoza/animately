@@ -3,26 +3,43 @@
 
 #include "Core/Timeline.h"
 #include "Util/TestProp.h"
+#include "Util/TestInverseTween.h"
 
 using namespace PropMechanic;
 
+TestInverseTween tween;
 TestProp prop1;
 TestProp prop2;
 TestProp prop3;
 Timeline timeline;
 
-
 test(basicScheduling)
 {
     prop1.reset();
-    timeline.schedule(0, 0, 5, 10,
+    timeline.schedule(0, 10, 5, 10,
         fastdelegate::MakeDelegate(&prop1, &TestProp::start),
         fastdelegate::MakeDelegate(&prop1, &TestProp::transition),
-        NULL,
+        fastdelegate::MakeDelegate(&tween, &TestInverseTween::getValue),
         fastdelegate::MakeDelegate(&prop1, &TestProp::end));
-
-    for (int i = 0; i < 20; i++) {
-        timeline.tick(i);
+    
+    int tickCount = 0;
+    for (int i = 0; i < 5; i++) {
+        timeline.tick(tickCount);
+        assertEqual(prop1.getValue(), 0);
+        tickCount++;
+    }        
+    
+    // Check that the test inversion tween is exactly where we expect
+    for (int i = 0; i < 10; i++) {
+        timeline.tick(tickCount);
+        assertEqual(prop1.getValue(), 10 - i); // Check the inversion tween
+        tickCount++;
+    }
+    
+    for (int i = 0; i < 10; i++) {
+        timeline.tick(tickCount);
+        assertEqual(prop1.getValue(), 10);
+        tickCount++;
     }
 
     assertEqual(prop1.getStarted(), 1);

@@ -59,6 +59,15 @@ namespace PropMechanic {
             TimelineTweenDelegate tweenDelegate,
             TimelineEventEndDelegate endDelegate,
             milliseconds currentMillis);
+            
+        void schedule(milliseconds delay, milliseconds duration,
+            TimelineEventStartDelegate startDelegate,
+            TimelineEventEndDelegate endDelegate);
+            
+        void schedule(milliseconds delay, milliseconds duration,
+            TimelineEventStartDelegate startDelegate,
+            TimelineEventEndDelegate endDelegate,
+            milliseconds currentMillis);
 
         void tick();
         void tick(milliseconds currentMillis);
