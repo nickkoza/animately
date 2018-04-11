@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-#include "../PropMechanic.h"
+#include "../Animately.h"
 #include "TimelineQueue.h"
 #include "List.h"
 #include "FastDelegate.h"
@@ -12,7 +12,7 @@
 // Timeline is constant-memory.
 // Timeline uses an unsigned long to keep track of time, meaning it can operate for up to _49_days_ before overflowing.
 // If you need to run longer than that you'll have to make changes to this system.
-namespace PropMechanic {
+namespace Animately {
     class Timeline
     {
     public:

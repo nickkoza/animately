@@ -1,6 +1,6 @@
 #include "Flicker.h"
 
-using namespace PropMechanic;
+using namespace Animately;
 
 Flicker::Flicker(FloatRange valueRange, IdleDurationRange idleDuration, TransitionDurationRange transitionDuration, SustainDurationRange sustainDuration) {
     this->valueRange = valueRange;

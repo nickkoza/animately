@@ -1,9 +1,9 @@
 #ifndef TWEEN_H_
 #define TWEEN_H_
 
-#include "../PropMechanic.h"
+#include "../Animately.h"
 
-namespace PropMechanic {
+namespace Animately {
     class Tween {
     public:  
         virtual float getValue(float transitionAmount) = 0;

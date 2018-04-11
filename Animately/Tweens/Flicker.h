@@ -2,12 +2,12 @@
 #define FLICKER_H_
 
 #include "Tween.h"
-#include "../PropMechanic.h"
+#include "../Animately.h"
 
 // The Flicker tween randomly moves between a low and high value. The value range defines the two values that it flickers between. The idle
 // duration is how long it can stay in the low state. The sustain duration is how long it can stay in the high state. And the transition
 // duration is how long it takes to go from one state to another.
-namespace PropMechanic {
+namespace Animately {
     typedef MillisecondRange IdleDurationRange; // Idle is the low state
     typedef MillisecondRange TransitionDurationRange;
     typedef MillisecondRange SustainDurationRange; // Sustain is the high state

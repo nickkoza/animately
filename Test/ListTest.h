@@ -3,7 +3,7 @@
 
 #include "Core/List.h"
 
-using namespace PropMechanic;
+using namespace Animately;
 
 List<int, 5> list;
 

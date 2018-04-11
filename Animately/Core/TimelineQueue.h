@@ -13,7 +13,7 @@ While the array is used to keep it memory-constant, the linked-list aspect is us
 find the lowest priority item. This is ideal for situations where we only care about the lowest priority item
 and not the rest of the list.
 */
-namespace PropMechanic {
+namespace Animately {
     template <class T, int LENGTH> class TimelineQueue
     {
     private:

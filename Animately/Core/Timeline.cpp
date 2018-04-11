@@ -1,6 +1,6 @@
 #include "Timeline.h"
 
-using namespace PropMechanic;
+using namespace Animately;
 
 Timeline::Timeline()
 {

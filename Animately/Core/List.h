@@ -1,7 +1,7 @@
 #ifndef LIST_H_
 #define LIST_H_
 
-namespace PropMechanic {
+namespace Animately {
     template <class T, unsigned int LENGTH> class List
     {
     private:

@@ -1,5 +1,5 @@
-#ifndef _PropMechanic_h
-#define _PropMechanic_h
+#ifndef _Animately_h
+#define _Animately_h
 
 #include "arduino.h"
 
@@ -66,4 +66,4 @@ struct MillisecondRange {
     milliseconds max;
 };
 
-#endif // _PropMechanic_h
+#endif // _Animately_h

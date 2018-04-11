@@ -15,7 +15,7 @@
     <AvrGccProjectExtensions>
     </AvrGccProjectExtensions>
     <AssemblyName>PropMechanic</AssemblyName>
-    <Name>PropMechanic</Name>
+    <Name>Animately</Name>
     <RootNamespace>PropMechanic</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
@@ -176,6 +176,9 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Animately.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Core\FastDelegate.h">
       <SubType>compile</SubType>
     </Compile>
@@ -209,10 +212,7 @@
     <Compile Include="Parts\TimeSwitch.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="PropMechanic.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="PropMechanic.h">
+    <Compile Include="Animately.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Tweens\Flicker.cpp">

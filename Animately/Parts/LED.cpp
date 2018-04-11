@@ -1,6 +1,6 @@
 #include "LED.h"
 
-using namespace PropMechanic;
+using namespace Animately;
 
 LED::LED(pinNum pin)
 {
