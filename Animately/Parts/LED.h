@@ -1,10 +1,10 @@
 #ifndef __LED_H__
 #define __LED_H__
 
-#include "../PropMechanic.h"
+#include "../Animately.h"
 #include "../Tweens/Tween.h"
 
-namespace PropMechanic {
+namespace Animately {
     class LED
     {
     private:

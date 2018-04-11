@@ -5,7 +5,7 @@
 #include "Util/TestProp.h"
 #include "Util/TestInverseTween.h"
 
-using namespace PropMechanic;
+using namespace Animately;
 
 TestInverseTween tween;
 TestProp prop1;

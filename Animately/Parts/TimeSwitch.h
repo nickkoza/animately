@@ -2,7 +2,7 @@
 #define _TimeSwitch_h
 
 #include "Arduino.h"
-#include "../PropMechanic.h"
+#include "../Animately.h"
 
 #ifndef TIME_SWITCH_OPEN_STATE
     #define TIME_SWITCH_OPEN_STATE LOW
@@ -12,7 +12,7 @@
     #define TIME_SWITCH_CLOSE_STATE HIGH
 #endif
 
-namespace PropMechanic {
+namespace Animately {
     class TimeSwitch
     {
     private:

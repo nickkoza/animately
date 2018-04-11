@@ -6,7 +6,7 @@
 #include "Speaker.h"
 #include "Memory.h"
 
-using namespace PropMechanic;
+using namespace Animately;
 
 class Scene {
 private:

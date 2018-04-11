@@ -2,7 +2,7 @@
 #define __SPEAKER_H__
 
 #include "Arduino.h"
-#include "PropMechanic.h"
+#include "Animately.h"
 
 class Speaker
 {

@@ -1,6 +1,6 @@
 #include "Button.h"
 
-using namespace PropMechanic;
+using namespace Animately;
 
 Button::Button(pinNum pin, inputId id, ButtonPressDelegate pressDelegate, ButtonHoldDelegate holdDelegate, ButtonReleaseDelegate releaseDelegate) {
     this->pin = pin;

@@ -3,13 +3,13 @@
 
 #include "Arduino.h"
 #include "../Core/FastDelegate.h"
-#include "../PropMechanic.h"
+#include "../Animately.h"
 
 // Button provides a basic interface for calling delegates and de-bouncing button inputs.
 // This class requires that you call the tick() method often.
 // This class is not designed for use with hardware interrupts, though you could modify
 // it for that use.
-namespace PropMechanic {
+namespace Animately {
     class Button {
         public:
         typedef fastdelegate::FastDelegate1<inputId> ButtonPressDelegate;

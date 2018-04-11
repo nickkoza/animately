@@ -1,7 +1,7 @@
 #ifndef TESTPROP_H_
 #define TESTPROP_H_
 
-#include "PropMechanic.h"
+#include "Animately.h"
 
 class TestProp {
 private:

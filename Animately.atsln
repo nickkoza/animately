@@ -3,11 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Atmel Studio Solution File, Format Version 11.00
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "PropMechanic", "PropMechanic\PropMechanic.cppproj", "{DCE6C7E3-EE26-4D79-826B-08594B9AD897}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A03C0AD2-0A3B-42E3-8342-C38F098E5668} = {A03C0AD2-0A3B-42E3-8342-C38F098E5668}
-	EndProjectSection
-EndProject
 Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "FuseBox", "FuseBox\FuseBox.cppproj", "{5E7C35B3-A80F-43A1-8FA7-FD7EF49C12E7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{DCE6C7E3-EE26-4D79-826B-08594B9AD897} = {DCE6C7E3-EE26-4D79-826B-08594B9AD897}
@@ -16,11 +11,16 @@ EndProject
 Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "ArduinoCore", "ArduinoCore\ArduinoCore.cppproj", "{A03C0AD2-0A3B-42E3-8342-C38F098E5668}"
 EndProject
 Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "Test", "Test\Test.cppproj", "{88F31A3C-46C8-4AFD-B2D5-B2BFBE22F1A3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897} = {DCE6C7E3-EE26-4D79-826B-08594B9AD897}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{80E3E531-FC51-4698-AB7F-7478916C422A}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "Animately", "Animately\Animately.cppproj", "{DCE6C7E3-EE26-4D79-826B-08594B9AD897}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,10 +28,6 @@ Global
 		Release|AVR = Release|AVR
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Debug|AVR.ActiveCfg = Debug|AVR
-		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Debug|AVR.Build.0 = Debug|AVR
-		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release|AVR.ActiveCfg = Release|AVR
-		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release|AVR.Build.0 = Release|AVR
 		{5E7C35B3-A80F-43A1-8FA7-FD7EF49C12E7}.Debug|AVR.ActiveCfg = Debug|AVR
 		{5E7C35B3-A80F-43A1-8FA7-FD7EF49C12E7}.Debug|AVR.Build.0 = Debug|AVR
 		{5E7C35B3-A80F-43A1-8FA7-FD7EF49C12E7}.Release|AVR.ActiveCfg = Release|AVR
@@ -44,6 +40,10 @@ Global
 		{88F31A3C-46C8-4AFD-B2D5-B2BFBE22F1A3}.Debug|AVR.Build.0 = Debug|AVR
 		{88F31A3C-46C8-4AFD-B2D5-B2BFBE22F1A3}.Release|AVR.ActiveCfg = Release|AVR
 		{88F31A3C-46C8-4AFD-B2D5-B2BFBE22F1A3}.Release|AVR.Build.0 = Release|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Debug|AVR.ActiveCfg = Debug|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Debug|AVR.Build.0 = Debug|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release|AVR.ActiveCfg = Release|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,7 +3,7 @@
 
 #include "Tweens/Tween.h"
 
-using namespace PropMechanic;
+using namespace Animately;
 
 class TestInverseTween: public Tween {
 public:
