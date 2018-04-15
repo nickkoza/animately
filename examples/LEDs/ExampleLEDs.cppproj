@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.CPP</ToolchainName>
-    <ProjectGuid>{5e7c35b3-a80f-43a1-8fa7-fd7ef49c12e7}</ProjectGuid>
+    <ProjectGuid>{5dc6fb3a-e0d9-4009-b81b-b30fe1fd340b}</ProjectGuid>
     <avrdevice>atmega328p</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
@@ -13,8 +13,8 @@
     <ArduinoProjectType>Sketch</ArduinoProjectType>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <Name>FuseBox</Name>
-    <RootNamespace>FuseBox</RootNamespace>
+    <Name>Example - LEDs</Name>
+    <RootNamespace>LEDs</RootNamespace>
     <ArduinoIdeDir>C:\Program Files (x86)\Arduino</ArduinoIdeDir>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
@@ -27,7 +27,7 @@
     <OverrideVtorValue>exception_table</OverrideVtorValue>
     <BootSegment>2</BootSegment>
     <eraseonlaunchrule>1</eraseonlaunchrule>
-    <AssemblyName>FuseBox</AssemblyName>
+    <AssemblyName>ExampleLEDs</AssemblyName>
     <ResetRule>0</ResetRule>
     <EraseKey />
     <AsfFrameworkConfig>
@@ -210,9 +210,9 @@
   <avrgcc.compiler.directories.IncludePaths>
     <ListValues>
       <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.150\include</Value>
-      <Value>%24(ProjectDir)\..\arduinocore\include\core</Value>
-      <Value>%24(ProjectDir)\..\arduinocore\include\variants\standard</Value>
-      <Value>%24(ProjectDir)\..\src</Value>
+      <Value>%24(ProjectDir)\..\..\arduinocore\include\core</Value>
+      <Value>%24(ProjectDir)\..\..\arduinocore\include\variants\standard</Value>
+      <Value>%24(ProjectDir)\..\..\src</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -247,9 +247,9 @@
   <avrgcccpp.compiler.directories.IncludePaths>
     <ListValues>
       <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.150\include</Value>
-      <Value>%24(ProjectDir)\..\ArduinoCore\include\core</Value>
-      <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\standard</Value>
-      <Value>%24(ProjectDir)\..\src</Value>
+      <Value>%24(ProjectDir)\..\..\ArduinoCore\include\core</Value>
+      <Value>%24(ProjectDir)\..\..\ArduinoCore\include\variants\standard</Value>
+      <Value>%24(ProjectDir)\..\..\src</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
@@ -276,28 +276,13 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="FuseBox.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Memory.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Memory.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Speaker.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Speaker.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Content Include="readme.html">
     </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ArduinoCore\ArduinoCore.cppproj">
       <Name>ArduinoCore</Name>
-      <Project>a03c0ad2-0a3b-42e3-8342-c38f098e5668</Project>
+      <Project>{a03c0ad2-0a3b-42e3-8342-c38f098e5668}</Project>
       <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\src\Animately.cppproj">
@@ -305,6 +290,11 @@
       <Project>{dce6c7e3-ee26-4d79-826b-08594b9ad897}</Project>
       <Private>True</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LEDs.cpp">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
