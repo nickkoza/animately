@@ -21,11 +21,6 @@ Animately is optimized for integrated systems and has a memory footprint that ca
   - [Action End Delegate](#action-end-delegate)
 - [Memory Usage](#memory-usage)
 
-
-# Installation
-TO DO
-
-
 # Configuration
 
 ## Overall
