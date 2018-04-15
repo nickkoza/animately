@@ -2,7 +2,6 @@
 #define __LED_H__
 
 #include "../Animately.h"
-#include "../Tweens/Tween.h"
 
 namespace Animately {
     class LED

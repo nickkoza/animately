@@ -1,0 +1,52 @@
+#######################################
+# Data type (DATA_TYPE)
+#######################################
+Timeline            DATA_TYPE
+Button              DATA_TYPE
+LED                 DATA_TYPE
+TimeSwitch          DATA_TYPE
+fastdelegate        DATA_TYPE
+milliseconds        DATA_TYPE
+pinNum              DATA_TYPE
+inputId             DATA_TYPE
+IntRange            DATA_TYPE
+FloatRange          DATA_TYPE
+MillisecondRange    DATA_TYPE
+
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+
+#######################################
+# Structures (KEYWORD3)
+#######################################
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+Animately           LITERAL1
+
+
+#######################################
+# Preprocessor (PREPROCESSOR)
+#######################################
+TIMELINE_MAX_SCHEDULED_ENTRIES  PREPROCESSOR
+TIMELINE_MAX_ACTIVE_ENTRIES     PREPROCESSOR
+COULD_NOT_ALLOCATE              PREPROCESSOR
+REDUNDANT_ALLOCATION            PREPROCESSOR
+COULD_NOT_SCHEDULE              PREPROCESSOR
+INVALID_INDEX                   PREPROCESSOR
+LOG                             PREPROCESSOR
+LOG_BUFFER_SIZE                 PREPROCESSOR
+LOGF                            PREPROCESSOR
+ERROR                           PREPROCESSOR
+DELEGATE                        PREPROCESSOR
+
