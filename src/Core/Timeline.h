@@ -34,8 +34,6 @@ namespace Animately {
             boolean used;
         };
 
-        // TODO - TimelineQueue can be made to hold onto type T instead of T*, which would allocate the memory right there in the
-        // queue rather than requiring this pool. It'd require a bit more work to copy the instance into place, but it'd save SRAM
         TimelineEntry entriesPool[TIMELINE_MAX_SCHEDULED_ENTRIES];
         TimelineQueue<TimelineEntry*, TIMELINE_MAX_SCHEDULED_ENTRIES> entries;
         List<TimelineEntry*, TIMELINE_MAX_ACTIVE_ENTRIES> activeEntries;

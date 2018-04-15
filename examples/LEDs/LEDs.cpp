@@ -221,7 +221,7 @@ BounceScene bounceScene(&timeline, leds, &exponential, &bounceOut);
 void setup() {
     Serial.begin(9600);
     
-    // Start the scene
+    // Choose a scene to start:
     //chaseScene.cue(0);
     //bounceScene.cue(0);
     fadeScene.cue(0);

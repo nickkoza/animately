@@ -3,11 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Atmel Studio Solution File, Format Version 11.00
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "FuseBox", "FuseBox\FuseBox.cppproj", "{5E7C35B3-A80F-43A1-8FA7-FD7EF49C12E7}"
-	ProjectSection(ProjectDependencies) = postProject
-		{DCE6C7E3-EE26-4D79-826B-08594B9AD897} = {DCE6C7E3-EE26-4D79-826B-08594B9AD897}
-	EndProjectSection
-EndProject
 Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "ArduinoCore", "ArduinoCore\ArduinoCore.cppproj", "{A03C0AD2-0A3B-42E3-8342-C38F098E5668}"
 EndProject
 Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "Test", "Test\Test.cppproj", "{88F31A3C-46C8-4AFD-B2D5-B2BFBE22F1A3}"
@@ -32,10 +27,6 @@ Global
 		Release|AVR = Release|AVR
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5E7C35B3-A80F-43A1-8FA7-FD7EF49C12E7}.Debug|AVR.ActiveCfg = Debug|AVR
-		{5E7C35B3-A80F-43A1-8FA7-FD7EF49C12E7}.Debug|AVR.Build.0 = Debug|AVR
-		{5E7C35B3-A80F-43A1-8FA7-FD7EF49C12E7}.Release|AVR.ActiveCfg = Release|AVR
-		{5E7C35B3-A80F-43A1-8FA7-FD7EF49C12E7}.Release|AVR.Build.0 = Release|AVR
 		{A03C0AD2-0A3B-42E3-8342-C38F098E5668}.Debug|AVR.ActiveCfg = Debug|AVR
 		{A03C0AD2-0A3B-42E3-8342-C38F098E5668}.Debug|AVR.Build.0 = Debug|AVR
 		{A03C0AD2-0A3B-42E3-8342-C38F098E5668}.Release|AVR.ActiveCfg = Release|AVR
