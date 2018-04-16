@@ -13,6 +13,15 @@ IntRange            DATA_TYPE
 FloatRange          DATA_TYPE
 MillisecondRange    DATA_TYPE
 
+Back                DATA_TYPE
+BounceOut           DATA_TYPE
+Exponential         DATA_TYPE
+Flicker             DATA_TYPE
+Quadratic           DATA_TYPE
+Quantic             DATA_TYPE
+Sine                DATA_TYPE
+Tween               DATA_TYPE
+
 
 #######################################
 # Methods and Functions (KEYWORD2)

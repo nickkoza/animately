@@ -2,14 +2,14 @@
 // This #define increases the number of animations that we can schedule at one time.
 #define TIMELINE_MAX_SCHEDULED_ENTRIES 20
 
-#include "Animately.h"
-#include "Core/Timeline.h"
-#include "Parts/LED.h"
-#include "Tweens/Quadratic.h"
-#include "Tweens/Quintic.h"
-#include "Tweens/Exponential.h"
-#include "Tweens/Sine.h"
-#include "Tweens/BounceOut.h"
+#include <Animately.h>
+#include <Core/Timeline.h>
+#include <Parts/LED.h>
+#include <Tweens/Quadratic.h>
+#include <Tweens/Quintic.h>
+#include <Tweens/Exponential.h>
+#include <Tweens/Sine.h>
+#include <Tweens/BounceOut.h>
 
 
 // By defining that we're using the Animately namespace, we don't have to prefix all Animately classes with "Animately::"

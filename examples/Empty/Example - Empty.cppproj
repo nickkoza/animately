@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.CPP</ToolchainName>
-    <ProjectGuid>{5dc6fb3a-e0d9-4009-b81b-b30fe1fd340b}</ProjectGuid>
+    <ProjectGuid>{c8041cfd-bf5d-4154-9c33-143139b80cfe}</ProjectGuid>
     <avrdevice>atmega328p</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
@@ -13,8 +13,8 @@
     <ArduinoProjectType>Sketch</ArduinoProjectType>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <Name>Example - LEDs</Name>
-    <RootNamespace>LEDs</RootNamespace>
+    <Name>Example - Empty</Name>
+    <RootNamespace>Empty</RootNamespace>
     <ArduinoIdeDir>C:\Program Files (x86)\Arduino</ArduinoIdeDir>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
@@ -27,7 +27,7 @@
     <OverrideVtorValue>exception_table</OverrideVtorValue>
     <BootSegment>2</BootSegment>
     <eraseonlaunchrule>1</eraseonlaunchrule>
-    <AssemblyName>ExampleLEDs</AssemblyName>
+    <AssemblyName>ExampleEmpty</AssemblyName>
     <ResetRule>0</ResetRule>
     <EraseKey />
     <AsfFrameworkConfig>
@@ -292,7 +292,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LEDs.cpp">
+    <Compile Include="Empty.ino">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
