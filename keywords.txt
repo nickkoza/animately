@@ -18,7 +18,8 @@ BounceOut	DATA_TYPE
 Exponential	DATA_TYPE
 Flicker	DATA_TYPE
 Quadratic	DATA_TYPE
-Quantic	DATA_TYPE
+Cubic	DATA_TYPE
+Quintic	DATA_TYPE
 Sine	DATA_TYPE
 Tween	DATA_TYPE
 

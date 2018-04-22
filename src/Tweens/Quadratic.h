@@ -44,9 +44,9 @@ namespace Animately {
         
         float inOut(float p) {
             if(p < 0.5f) {
-                return 0.5f * p * p;
+                return 2.f * p * p;
             }
-            return (-2.f * p * p) + (4.f * p) - 1.f;
+			return (-2.f * p * p) + (4.f * p) - 1.f;
         }
     };
 }    

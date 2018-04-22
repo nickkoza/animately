@@ -52,6 +52,10 @@
     #define INVALID_INDEX "E04"
 #endif
 
+#ifndef VALUE_OUT_OF_RANGE
+    #define VALUE_OUT_OF_RANGE "E05"
+#endif
+
 
 // LOGGING
 #ifndef LOG
