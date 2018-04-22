@@ -228,6 +228,9 @@
     <Compile Include="Tweens\BounceOut.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Tweens\Cubic.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Tweens\Exponential.h">
       <SubType>compile</SubType>
     </Compile>

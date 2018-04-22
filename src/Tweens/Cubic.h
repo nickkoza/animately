@@ -28,25 +28,29 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-#ifndef SINE_H_
-#define SINE_H_
+#ifndef CUBIC_H_
+#define CUBIC_H_
 
 namespace Animately {
-    class Sine {
+    class Cubic {
         public:
         float in(float p) {
-            return sin((p - 1) * M_PI_2) + 1;
+            return p * p * p;
         }
         
         float out(float p) {
-            return sin(p * M_PI_2);
+            p = (p - 1.f);
+            return p * p * p + 1.f;
         }
         
         float inOut(float p) {
-            return 0.5 * (1 - cos(p * M_PI));
+            if(p < 0.5f) {
+                return 4.f * p * p * p;
+            }
+            p = ((2.f * p) - 2.f);
+            return 0.5f * p * p * p + 1.f;
         }
     };
 }
 
-#endif /* SINE_H_ */
+#endif /* CUBIC_H_ */

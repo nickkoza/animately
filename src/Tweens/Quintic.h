@@ -39,17 +39,17 @@ namespace Animately {
         }
         
         float out(float p) {
+            float f = (p - 1);
+            return f * f * f * f * f + 1;
+        }
+        
+        float inOut(float p) {
             if(p < 0.5)
             {
                 return 16 * p * p * p * p * p;
             }
             float f = ((2 * p) - 2);
             return  0.5 * f * f * f * f * f + 1;
-        }
-        
-        float inOut(float p) {
-            float f = (p - 1);
-            return f * f * f * f * f + 1;
         }
     };
 }
