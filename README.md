@@ -20,6 +20,7 @@ Animately is optimized for integrated systems and has a memory footprint that ca
   - [Action Tween Delegate](#action-tween-delegate)
   - [Action End Delegate](#action-end-delegate)
 - [Memory Usage](#memory-usage)
+- [Roadmap](#roadmap)
 
 # Configuration
 
@@ -135,3 +136,10 @@ The Action Start Delegate is called when a scheduled action is finished. This is
 Every timeline entry uses 37 bytes of SRAM, which can add up quickly if you're scheduling longer animations. So it's important that you tune `TIMELINE_MAX_SCHEDULED_ENTRIES` carefully. If you need to play longer animations, you should chain together several shorter animations, so it doesn't have to load the entire animation into memory at once.
 
 
+# Roadmap
+* Streaming animations from flash/program memory.
+  * Delivery estimate: Unknown.
+  * This would allow for smaller SRAM usage, as the timeline would act only as a buffer.
+* Streaming animations from SD card.
+  * Delivery estimate: Unknown.
+  * This would allow for even larger animations, while keeping SRAM usage to a minimum.
