@@ -852,12 +852,13 @@ namespace fastdelegate {
     //N=0
     template<class RetType=detail::DefaultVoid>
     class FastDelegate0 {
-        private:
+        public:
         typedef typename detail::DefaultVoidToVoid<RetType>::type DesiredRetType;
         typedef DesiredRetType (*StaticFunctionPtr)();
         typedef RetType (*UnvoidStaticFunctionPtr)();
         typedef RetType (detail::GenericClass::*GenericMemFn)();
         typedef detail::ClosurePtr<GenericMemFn, StaticFunctionPtr, UnvoidStaticFunctionPtr> ClosureType;
+        private:
         ClosureType m_Closure;
         public:
         // Typedefs to aid generic programming
@@ -937,12 +938,13 @@ namespace fastdelegate {
     //N=1
     template<class Param1, class RetType=detail::DefaultVoid>
     class FastDelegate1 {
-        private:
+        public:
         typedef typename detail::DefaultVoidToVoid<RetType>::type DesiredRetType;
         typedef DesiredRetType (*StaticFunctionPtr)(Param1 p1);
         typedef RetType (*UnvoidStaticFunctionPtr)(Param1 p1);
         typedef RetType (detail::GenericClass::*GenericMemFn)(Param1 p1);
         typedef detail::ClosurePtr<GenericMemFn, StaticFunctionPtr, UnvoidStaticFunctionPtr> ClosureType;
+        private:
         ClosureType m_Closure;
         public:
         // Typedefs to aid generic programming

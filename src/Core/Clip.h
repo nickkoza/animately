@@ -1,4 +1,4 @@
-﻿// MIT License
+// MIT License
 //
 // Copyright (c) 2018 Nicholas Koza
 //
@@ -20,20 +20,35 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "ArduinoUnitUtility/ArduinoUnit.h"
+#ifndef __CLIP_H__
+#define __CLIP_H__
 
-#include "Core/Timeline.h"
-#include "TimelineTest.h"
-#include "ListTest.h"
-#include "ClipTest.h"
+#include "../Animately.h"
+#include "Timeline.h"
+#include "FastDelegate.h"
 
-void setup()
-{
-    Serial.begin(9600);
-    while(!Serial) {} // Portability for Leonardo/Micro
+namespace Animately {
+    class Clip
+    {
+        private:
+        Timeline::Entry entries[];
+
+        public:
+        struct Entry {
+            propId prop;
+            tweenId tween;
+            Timeline::StartDelegateFunction startMethod;
+            Timeline::TransitionDelegateFunction transitionMethod;
+            Timeline::EndDelegateFunction endMethod;
+            Timeline::TweenDelegateFunction tweenMethod;
+            int targetValue;
+            milliseconds startsAt;
+            milliseconds endsAt;
+        };
+
+        Clip();
+
+    };
 }
 
-void loop()
-{
-    Test::run();
-}
+#endif //__CLIP_H__

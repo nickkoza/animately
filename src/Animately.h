@@ -76,6 +76,8 @@
 typedef unsigned long milliseconds;
 typedef char pinNum;
 typedef char inputId;
+typedef char propId;
+typedef char tweenId;
 
 struct IntRange {
     int min;

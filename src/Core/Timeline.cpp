@@ -24,40 +24,39 @@
 
 using namespace Animately;
 
-Timeline::Timeline()
-{
-    memset(entriesPool, 0, sizeof(TimelineEntry) * TIMELINE_MAX_SCHEDULED_ENTRIES);
+Timeline::Timeline() {
+    memset(entriesPool, 0, sizeof(Entry) * TIMELINE_MAX_SCHEDULED_ENTRIES);
 }
 
 void Timeline::schedule(int fromValue, int toValue, milliseconds delay, milliseconds duration,
-    TimelineEventStartDelegate startDelegate,
-    TimelineTransitionDelegate transitionDelegate,
-    TimelineTweenDelegate tweenDelegate,
-    TimelineEventEndDelegate endDelegate) {
+    StartDelegate startDelegate,
+    TransitionDelegate transitionDelegate,
+    TweenDelegate tweenDelegate,
+    EndDelegate endDelegate) {
     schedule(fromValue, toValue, delay, duration, startDelegate, transitionDelegate, tweenDelegate, endDelegate, millis());
 }
 
 void Timeline::schedule(milliseconds delay, milliseconds duration,
-    TimelineEventStartDelegate startDelegate,
-    TimelineEventEndDelegate endDelegate) {
+    StartDelegate startDelegate,
+    EndDelegate endDelegate) {
     schedule(0, 0, delay, duration, startDelegate, NULL, NULL, endDelegate);
 }
 
 void Timeline::schedule(milliseconds delay, milliseconds duration,
-    TimelineEventStartDelegate startDelegate,
-    TimelineEventEndDelegate endDelegate,
+    StartDelegate startDelegate,
+    EndDelegate endDelegate,
     milliseconds currentMillis) {
     schedule(0, 0, delay, duration, startDelegate, NULL, NULL, endDelegate, currentMillis);
 }
 
 void Timeline::schedule(int fromValue, int toValue, milliseconds delay, milliseconds duration,
-    TimelineEventStartDelegate startDelegate,
-    TimelineTransitionDelegate transitionDelegate,
-    TimelineTweenDelegate tweenDelegate,
-    TimelineEventEndDelegate endDelegate,
+    StartDelegate startDelegate,
+    TransitionDelegate transitionDelegate,
+    TweenDelegate tweenDelegate,
+    EndDelegate endDelegate,
     milliseconds currentMillis)
 {
-    TimelineEntry *entry = getEntry();
+    Entry *entry = getEntry();
     if (NULL == entry) {
         ERROR(COULD_NOT_SCHEDULE);
         return;
@@ -83,7 +82,7 @@ void Timeline::tick() {
 void Timeline::tick(milliseconds currentMillis) {   
     // Start events
     if (entries.isNotEmpty() && entries.peakPriority() <= currentMillis) {
-        TimelineEntry *entry = entries.pop();
+        Entry *entry = entries.pop();
         entry->startedAt = currentMillis;
         activeEntries.add(entry);
         if (NULL != entry->startDelegate) {
@@ -93,7 +92,7 @@ void Timeline::tick(milliseconds currentMillis) {
     
     // Active events
     for (int i = 0; i < activeEntries.size(); i++) {
-        TimelineEntry *entry = activeEntries.get(i);
+        Entry *entry = activeEntries.get(i);
         if (NULL != entry->transitionDelegate) {
             float transitionAmount = (float)(currentMillis - entry->startedAt) / (float)entry->duration;
             
@@ -116,7 +115,7 @@ void Timeline::tick(milliseconds currentMillis) {
     }
 }
 
-Timeline::TimelineEntry *Timeline::getEntry() {
+Timeline::Entry *Timeline::getEntry() {
     for (int i = 0; i < TIMELINE_MAX_SCHEDULED_ENTRIES; i++) {
         if(entriesPool[i].startDelegate.empty() &&
             entriesPool[i].transitionDelegate.empty() &&
@@ -130,7 +129,7 @@ Timeline::TimelineEntry *Timeline::getEntry() {
     return NULL;
 }
 
-void Timeline::returnEntry(TimelineEntry *entry) {
+void Timeline::returnEntry(Entry *entry) {
     entry->used = false;
     entry->startDelegate.clear();
     entry->transitionDelegate.clear();

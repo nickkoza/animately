@@ -14,13 +14,12 @@ Animately is optimized for integrated systems and has a memory footprint that ca
 - [Usage](#usage)
   - [Timeline](#timeline)
   - [Scheduling](#scheduling)
-- [Events and Delegates](#events-and-delegates)
+- [Actions and Delegates](#actions-and-delegates)
   - [Action Start Delegate](#action-start-delegate)
   - [Action Transition Delegate](#action-transition-delegate)
   - [Action Tween Delegate](#action-tween-delegate)
   - [Action End Delegate](#action-end-delegate)
 - [Memory Usage](#memory-usage)
-- [Roadmap](#roadmap)
 
 # Configuration
 
@@ -97,15 +96,15 @@ Items can be scheduled to run in the future using `timeline.schedule`. The `sche
 * `int toValue` - The target integer value to end at once the animation is complete. `endDelegate` will be called with this value.
 * `milliseconds delay` - How soon, in milliseconds, to start playing this animation. This is always relative to the current time.
 * `milliseconds duration` - How long, in milliseconds, it takes to smoothly go from `fromValue` to `toValue`.
-* `TimelineEventStartDelegate startDelegate` - Method to call when the animation starts. See [Action Start Delegate](#action-start-delegate) below.
-* `TimelineTransitionDelegate transitionDelegate` - Method to call while the animation is in progress. See [Action Transition Delegate](#action-transition-delegate) below.
-* `TimelineTweenDelegate tweenDelegate` - Method to call to tween the values. See [Action Tween Delegate](#action-tween-delegate) below.
-* `TimelineEventEndDelegate endDelegate` - Method to call when the animation finishes. See [Action End Delegate](#action-end-delegate) below.
+* `StartDelegate startDelegate` - Method to call when the animation starts. See [Action Start Delegate](#action-start-delegate) below.
+* `TransitionDelegate transitionDelegate` - Method to call while the animation is in progress. See [Action Transition Delegate](#action-transition-delegate) below.
+* `TweenDelegate tweenDelegate` - Method to call to tween the values. See [Action Tween Delegate](#action-tween-delegate) below.
+* `EndDelegate endDelegate` - Method to call when the animation finishes. See [Action End Delegate](#action-end-delegate) below.
 
 If there are more than [`TIMELINE_MAX_SCHEDULED_ENTRIES`](#timeline_max_scheduled_entries) items scheduled for animation already then the request to schedule a new item will be ignored.
 
 
-# Events and Delegates
+# Actions and Delegates
 All delegates can take in a pointer to any instance method, as long as the method signature matches what is expected below. This means you can very easily schedule arbitrary method invocations as part of your animation, or create new tweening algorithms.
 
 #### Action Start Delegate
@@ -136,10 +135,3 @@ The Action Start Delegate is called when a scheduled action is finished. This is
 Every timeline entry uses 37 bytes of SRAM, which can add up quickly if you're scheduling longer animations. So it's important that you tune `TIMELINE_MAX_SCHEDULED_ENTRIES` carefully. If you need to play longer animations, you should chain together several shorter animations, so it doesn't have to load the entire animation into memory at once.
 
 
-# Roadmap
-* Streaming animations from flash/program memory.
-  * Delivery estimate: Unknown.
-  * This would allow for smaller SRAM usage, as the timeline would act only as a buffer.
-* Streaming animations from SD card.
-  * Delivery estimate: Unknown.
-  * This would allow for even larger animations, while keeping SRAM usage to a minimum.

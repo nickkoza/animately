@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.CPP</ToolchainName>
-    <ProjectGuid>dce6c7e3-ee26-4d79-826b-08594b9ad897</ProjectGuid>
+    <ProjectGuid>{dce6c7e3-ee26-4d79-826b-08594b9ad897}</ProjectGuid>
     <avrdevice>ATmega328P</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>StaticLibrary</OutputType>
@@ -189,10 +189,22 @@
     <Compile Include="Animately.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Core\Clip.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Core\Clip.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Core\FastDelegate.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Core\List.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Core\Registry.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Core\Registry.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Core\Timeline.cpp">

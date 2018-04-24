@@ -1,4 +1,4 @@
-﻿// MIT License
+// MIT License
 //
 // Copyright (c) 2018 Nicholas Koza
 //
@@ -20,20 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "ArduinoUnitUtility/ArduinoUnit.h"
 
-#include "Core/Timeline.h"
-#include "TimelineTest.h"
-#include "ListTest.h"
-#include "ClipTest.h"
+#include "Clip.h"
 
-void setup()
-{
-    Serial.begin(9600);
-    while(!Serial) {} // Portability for Leonardo/Micro
-}
+using namespace Animately;
 
-void loop()
-{
-    Test::run();
+Clip::Clip() {
+    
 }

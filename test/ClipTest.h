@@ -1,4 +1,4 @@
-﻿// MIT License
+// MIT License
 //
 // Copyright (c) 2018 Nicholas Koza
 //
@@ -20,20 +20,34 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "ArduinoUnitUtility/ArduinoUnit.h"
+#ifndef CLIPTEST_H_
+#define CLIPTEST_H_
 
-#include "Core/Timeline.h"
-#include "TimelineTest.h"
-#include "ListTest.h"
-#include "ClipTest.h"
+#include "Arduino.h"
+#include "Core/Clip.h"
+#include "Util/TestProp.h"
 
-void setup()
+using namespace Animately;
+
+const PROGMEM Clip::Entry clip = {
+    /*           prop ID:*/ 0,
+    /*          tween ID:*/ 1,
+    /*      start method:*/ (void*)&TestProp::start,
+    /* transition method:*/ (void*)&TestProp::transition,
+    /*        end method:*/ (void*)&TestProp::end,
+    /*      tween method:*/ NULL,
+    /*      target value:*/ 100,
+    /*         starts at:*/ 25,
+    /*           ends at:*/ 150
+};
+
+// FastDelegate0(Y *pthis, DesiredRetType (X::* function_to_bind)() ) {
+//     m_Closure.bindmemfunc(detail::implicit_cast<X*>(pthis), function_to_bind);
+// }
+
+test(basicPlayBack)
 {
-    Serial.begin(9600);
-    while(!Serial) {} // Portability for Leonardo/Micro
+    
 }
 
-void loop()
-{
-    Test::run();
-}
+#endif /* CLIPTEST_H_ */
