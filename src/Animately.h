@@ -23,7 +23,7 @@
 #ifndef _Animately_h
 #define _Animately_h
 
-#include "arduino.h"
+#include "Arduino.h"
 
 // CONFIGURATION
 #ifndef TIMELINE_MAX_SCHEDULED_ENTRIES
